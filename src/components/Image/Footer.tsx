@@ -12,7 +12,7 @@ function Footer() {
         bottom: "20px",
         color: "#A1A1AA",
         fontFamily: "Inter",
-        fontWeight: 500,
+        fontWeight: 900,
         textAlign: "center",
       }}
     >

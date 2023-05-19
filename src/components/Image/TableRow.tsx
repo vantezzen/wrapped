@@ -5,7 +5,7 @@ function TableRow({ title, value }: { title: string; value: string | number }) {
     <tr
       style={{
         fontFamily: "Inter",
-        fontWeight: 500,
+        fontWeight: 900,
         fontSize: "40px",
         width: "800px",
       }}

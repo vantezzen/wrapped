@@ -11,13 +11,9 @@ export const runtime = "edge";
 const interBlack = fetch(
   new URL("./Inter/Inter-Black.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
-const interMedium = fetch(
-  new URL("./Inter/Inter-Medium.ttf", import.meta.url)
-).then((res) => res.arrayBuffer());
 
 export async function GET(request: Request) {
   const interBlackData = await interBlack;
-  const interMediumData = await interMedium;
 
   const { searchParams } = new URL(request.url);
   const reqData = ShareImageDataSchema.safeParse(
@@ -108,12 +104,6 @@ export async function GET(request: Request) {
           name: "Inter",
           data: interBlackData,
           weight: 900,
-          style: "normal",
-        },
-        {
-          name: "Inter",
-          data: interMediumData,
-          weight: 500,
           style: "normal",
         },
       ],
