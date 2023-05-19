@@ -1,4 +1,3 @@
-import wait from "../utils/wait";
 
 export default class SpotifyFramePlayer {
   public embedController: EmbedController | null = null;

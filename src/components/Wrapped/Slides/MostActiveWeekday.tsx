@@ -2,9 +2,7 @@ import React from "react";
 import WrappedContainer, { WrappedSlideProps } from "../WrappedContainer";
 import FatHeading from "../FatHeading";
 import InfoText from "../InfoText";
-import CountUp from "react-countup";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
-import HideForTime from "../HideForTime";
 
 function MostActiveWeekday({ statistics }: WrappedSlideProps) {
   const { amount, unit } = formatTimeLength(

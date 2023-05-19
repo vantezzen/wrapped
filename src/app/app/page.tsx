@@ -1,6 +1,6 @@
 "use client";
 import Wrapped from "@/lib/Wrapped";
-import React, { useEffect } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import FileUpload from "@/components/Preparation/FileUpload";
 import WrappedCreator from "@/lib/WrappedCreator";
