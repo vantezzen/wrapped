@@ -12,6 +12,8 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import IntroInformation from "@/components/Wrapped/IntroInformation";
 import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
 import SpotifyPlayer from "@/components/Wrapped/SpotifyPlayer";
+import wait from "@/lib/utils/wait";
+import SpotifyInfoText from "@/components/Wrapped/SpotifyInfoText";
 
 const WrappedPlayerComponent = dynamic(
   () => import("@/components/Wrapped/WrappedPlayerComponent"),
@@ -45,7 +47,9 @@ function TikTokWrappedAppPage() {
             await spotify.loadLibrary();
             setSpotify(spotify);
 
-            setPage("ready");
+            await wait(5000);
+
+            setPage(spotify.canPlaySongs ? "ready" : "spotify");
           }}
         />
       )}
@@ -57,6 +61,10 @@ function TikTokWrappedAppPage() {
             We're preparing your Wrapped...
           </InfoText>
         </WrappedContainer>
+      )}
+
+      {page === "spotify" && (
+        <SpotifyInfoText onContinue={() => setPage("ready")} />
       )}
 
       {page === "ready" && (

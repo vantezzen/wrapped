@@ -2,6 +2,7 @@ import wait from "../utils/wait";
 
 export default class SpotifyFramePlayer {
   public embedController: EmbedController | null = null;
+  public canPlaySongs = false;
 
   private currentIFrame: HTMLIFrameElement | null = null;
   private previousIFrame: HTMLIFrameElement | null = null;
@@ -21,20 +22,36 @@ export default class SpotifyFramePlayer {
       window.onSpotifyIframeApiReady = (IFrameAPI: SpotifyIframeApi) => {
         const element = document.getElementById("spotify");
         const options = {
-          uri: "",
+          uri: "spotify:track:7oDd86yk8itslrA9HRP2ki",
           width: 300,
           height: 80,
           theme: "dark",
         };
         IFrameAPI.createController(element!, options, (EmbedController) => {
-          window.ec = EmbedController;
           this.embedController = EmbedController;
 
-          // We'll use the new embed API so remove the default iframe
-          document
-            .getElementById("spotify-wrapper")
-            ?.querySelector("iframe")
-            ?.remove();
+          const enablePlayback = () => {
+            if (this.canPlaySongs) return;
+            console.log("Spotify IFrame ready");
+            this.canPlaySongs = true;
+
+            // We'll create separate iFrames for each new song to increase
+            // loading speed. Removing the default iFrame will break
+            // the Spotify API, so we'll just hide it instead.
+            const defaultIframe = document
+              .getElementById("spotify-wrapper")
+              ?.querySelector("iframe");
+
+            if (defaultIframe) {
+              defaultIframe.style.opacity = "0";
+              defaultIframe.style.position = "absolute";
+              defaultIframe.style.top = "-1000px";
+            }
+
+            this.embedController!.removeListener("ready", enablePlayback);
+          };
+
+          this.embedController!.addListener("ready", enablePlayback);
 
           clearTimeout(timeout);
           resolve();
@@ -44,6 +61,10 @@ export default class SpotifyFramePlayer {
   }
 
   public async playSong(uri: string, seekTo: number = 0) {
+    if (!this.canPlaySongs) {
+      console.error("User cannot play songs");
+      return;
+    }
     if (!this.embedController) {
       console.error("SpotifyFramePlayer not initialized");
       return;
@@ -146,6 +167,10 @@ export default class SpotifyFramePlayer {
   }
 
   public async pause() {
+    if (!this.canPlaySongs) {
+      console.error("User cannot play songs");
+      return;
+    }
     if (!this.embedController) {
       console.error("SpotifyFramePlayer not initialized");
       return;

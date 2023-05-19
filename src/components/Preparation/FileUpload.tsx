@@ -11,7 +11,9 @@ function FileUpload({ onFileSelect }: { onFileSelect: (file: File) => void }) {
   return (
     <div className="w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center bg-zinc-900 text-starship-400 dark">
       <FatHeading className="text-3xl">
-        Select your TikTok data to get started
+        Select your TikTok
+        <br />
+        data to get started
       </FatHeading>
 
       <MutedText className="!text-zinc-200 text-base">
