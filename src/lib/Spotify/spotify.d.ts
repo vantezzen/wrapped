@@ -11,6 +11,8 @@ interface EmbedController {
   addListener(event: string, callback: (state: any) => void): void;
   once(event: string, callback: () => void): void;
   removeListener(event: string, callback: (state: any) => void): void;
+
+  iframeElement: HTMLIFrameElement;
 }
 
 interface SpotifyIframeApi {

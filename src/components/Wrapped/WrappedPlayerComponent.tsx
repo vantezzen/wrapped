@@ -2,8 +2,17 @@
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import WrappedPlayer from "@/lib/Player/WrappedPlayer";
 import React, { useEffect, useState } from "react";
-import { WrappedSlideProps } from "./WrappedContainer";
+import WrappedContainer, { WrappedSlideProps } from "./WrappedContainer";
 import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
+import { Loader2 } from "lucide-react";
+
+const LoadingPlayerComponent = (props: WrappedSlideProps) => {
+  return (
+    <WrappedContainer>
+      <Loader2 size={32} className="animate-spin" />
+    </WrappedContainer>
+  );
+};
 
 function WrappedPlayerComponent({
   spotify,
@@ -27,7 +36,7 @@ function WrappedPlayerComponent({
     player.spotifyPlayer = spotify;
   }, [spotify]);
 
-  const Component = player.currentSlide?.component || "div";
+  const Component = player.currentSlide?.component || LoadingPlayerComponent;
 
   return (
     <>

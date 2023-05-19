@@ -104,8 +104,9 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
         weekdayUsage[weekday] += WatchSessionsStatistic.SESSION_END_TIME;
         totalSessions++;
 
-        const sessionLength =
-          (videoStartTime.getTime() - currentSessionStartTime.getTime()) / 1000;
+        const sessionLength = Math.abs(
+          (videoStartTime.getTime() - currentSessionStartTime.getTime()) / 1000
+        );
         sessionLengths.push(sessionLength);
 
         if (sessionLength > longestWatchSession.lengthSec) {
