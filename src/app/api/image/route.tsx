@@ -2,6 +2,7 @@ import Container from "@/components/Image/Container";
 import Footer from "@/components/Image/Footer";
 import TableRow from "@/components/Image/TableRow";
 import Waves from "@/components/Image/Waves";
+import { ShareImageDataSchema } from "@/lib/types";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
 import { ImageResponse } from "next/server";
 
@@ -19,7 +20,15 @@ export async function GET(request: Request) {
   const interMediumData = await interMedium;
 
   const { searchParams } = new URL(request.url);
-  const data = JSON.parse(searchParams.get("data") ?? "{}");
+  const reqData = ShareImageDataSchema.safeParse(
+    JSON.parse(searchParams.get("data") ?? "{}")
+  );
+
+  if (!reqData.success) {
+    return new Response("Invalid request", { status: 400 });
+  }
+
+  const { data } = reqData;
 
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
     formatTimeLength(data.totalWatchTime);
