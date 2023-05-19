@@ -1,5 +1,4 @@
 import { WrappedSlideProps } from "@/components/Wrapped/WrappedContainer";
-import Wrapped from "../Wrapped";
 import EventEmitter from "events";
 import Intro from "@/components/Wrapped/Slides/Intro";
 import WatchedVideos from "@/components/Wrapped/Slides/WatchedVideos";

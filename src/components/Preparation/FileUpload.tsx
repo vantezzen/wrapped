@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import FatHeading from "../Wrapped/FatHeading";
-import InfoText from "../Wrapped/InfoText";
 import { Button } from "../ui/button";
 import { File } from "lucide-react";
 import MutedText from "../Wrapped/MutedText";

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/router";
 import MutedText from "./Wrapped/MutedText";
 
 function Footer() {

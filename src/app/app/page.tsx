@@ -1,5 +1,5 @@
 "use client";
-import Wrapped, { SAMPLE_STATISTICS } from "@/lib/Wrapped";
+import Wrapped from "@/lib/Wrapped";
 import React from "react";
 import dynamic from "next/dynamic";
 import FileUpload from "@/components/Preparation/FileUpload";

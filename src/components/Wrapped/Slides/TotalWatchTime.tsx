@@ -4,7 +4,6 @@ import FatHeading from "../FatHeading";
 import InfoText from "../InfoText";
 import CountUp from "react-countup";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
-import getComparableActivity from "@/lib/utils/getComparableActivity";
 
 function TotalWatchTime({ statistics }: WrappedSlideProps) {
   const { amount, unit } = formatTimeLength(
