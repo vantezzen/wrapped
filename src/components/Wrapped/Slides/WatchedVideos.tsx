@@ -33,7 +33,7 @@ function WatchedVideos({ statistics }: WrappedSlideProps) {
       </FatHeading>
 
       <HideForTime time={500}>
-        <InfoText className="animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
+        <InfoText className="!text-zinc-200 animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
           {lookup(statistics.videoAmountWatched, commentsOnVideos)}
         </InfoText>
       </HideForTime>

@@ -30,8 +30,9 @@ function IntroInformation({ onContinue }: { onContinue: () => void }) {
           . This may take a few hours or days, depending on how much data you
           have on TikTok.
           <br />
-          Be sure to choose "JSON - Machine-readable file" as the file format,
-          otherwise Wrapped for TikTok won't be able to read your data.
+          Be sure to choose "<strong>JSON - Machine-readable file</strong>" as
+          the file format, otherwise Wrapped for TikTok won't be able to read
+          your data.
         </MutedText>
       </div>
 

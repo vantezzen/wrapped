@@ -1,6 +1,6 @@
 "use client";
 import Wrapped from "@/lib/Wrapped";
-import React from "react";
+import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import FileUpload from "@/components/Preparation/FileUpload";
 import WrappedCreator from "@/lib/WrappedCreator";
@@ -10,6 +10,8 @@ import InfoText from "@/components/Wrapped/InfoText";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import IntroInformation from "@/components/Wrapped/IntroInformation";
+import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
+import SpotifyPlayer from "@/components/Wrapped/SpotifyPlayer";
 
 const WrappedPlayerComponent = dynamic(
   () => import("@/components/Wrapped/WrappedPlayerComponent"),
@@ -21,9 +23,12 @@ const WrappedPlayerComponent = dynamic(
 function TikTokWrappedAppPage() {
   const [page, setPage] = React.useState("intro");
   const [wrapped, setWrapped] = React.useState<Wrapped | null>(null);
+  const [spotify, setSpotify] = React.useState<SpotifyFramePlayer | null>(null);
 
   return (
     <div>
+      <SpotifyPlayer />
+
       {page === "intro" && (
         <IntroInformation onContinue={() => setPage("upload")} />
       )}
@@ -35,6 +40,11 @@ function TikTokWrappedAppPage() {
             const creator = new WrappedCreator();
             const wrapped = await creator.fromFile(file);
             setWrapped(wrapped);
+
+            const spotify = new SpotifyFramePlayer();
+            await spotify.loadLibrary();
+            setSpotify(spotify);
+
             setPage("ready");
           }}
         />
@@ -66,7 +76,10 @@ function TikTokWrappedAppPage() {
       )}
 
       {page === "play" && (
-        <WrappedPlayerComponent statistics={wrapped!.getStatistics()} />
+        <WrappedPlayerComponent
+          statistics={wrapped!.getStatistics()}
+          spotify={spotify}
+        />
       )}
     </div>
   );

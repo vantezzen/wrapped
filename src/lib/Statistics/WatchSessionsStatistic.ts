@@ -11,6 +11,10 @@ export type WatchSessionsStatisticResult = {
     endTime: Date;
     lengthSec: number;
   };
+  mostActiveWeekday: {
+    weekday: string;
+    averageUsageTime: number;
+  };
 };
 
 export default class WatchSessionsStatistic extends Statistic<WatchSessionsStatisticResult> {
@@ -48,6 +52,10 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
           endTime: new Date(),
           lengthSec: 0,
         },
+        mostActiveWeekday: {
+          weekday: "",
+          averageUsageTime: 0,
+        },
       };
     }
 
@@ -56,6 +64,17 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       endTime: new Date(videoList[0].Date),
       lengthSec: 0,
     };
+
+    const weekdayUsage = [0, 0, 0, 0, 0, 0, 0];
+    const weekdaysWithSessions = [
+      new Set(),
+      new Set(),
+      new Set(),
+      new Set(),
+      new Set(),
+      new Set(),
+      new Set(),
+    ];
 
     for (let i = 1; i < videoList.length; i++) {
       const video = videoList[i];
@@ -72,13 +91,17 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
         (videoStartTime.getTime() - previousVideoStartTime.getTime()) / 1000
       ); // in seconds
 
+      const weekday = videoStartTime.getDay();
+      weekdaysWithSessions[weekday].add(videoStartTime.toDateString());
       if (
         timeBetweenVideoWatched < WatchSessionsStatistic.MAX_TIME_BETWEEN_VIDEOS
       ) {
         totalWatchTimeSec += timeBetweenVideoWatched;
+        weekdayUsage[weekday] += timeBetweenVideoWatched;
       } else {
         // End of a session
         totalWatchTimeSec += WatchSessionsStatistic.SESSION_END_TIME;
+        weekdayUsage[weekday] += WatchSessionsStatistic.SESSION_END_TIME;
         totalSessions++;
 
         const sessionLength =
@@ -97,6 +120,10 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       }
     }
 
+    const mostActiveWeekdayIndex = weekdayUsage.indexOf(
+      Math.max(...weekdayUsage)
+    );
+
     return {
       totalWatchTimeSec,
       totalSessions,
@@ -105,6 +132,20 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       earliestVideoWatched: new Date(videoList[0].Date),
       latestVideoWatched: new Date(videoList[videoList.length - 1].Date),
       longestWatchSession,
+      mostActiveWeekday: {
+        weekday: [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ][mostActiveWeekdayIndex],
+        averageUsageTime:
+          weekdayUsage[mostActiveWeekdayIndex] /
+          weekdaysWithSessions[mostActiveWeekdayIndex].size,
+      },
     };
   }
 }

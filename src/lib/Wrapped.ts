@@ -1,3 +1,4 @@
+import SpotifyFramePlayer from "./Spotify/FramePlayer";
 import CommentsStatistic, {
   CommentsStatisticResult,
 } from "./Statistics/CommentsStatistic";
@@ -39,6 +40,10 @@ export const SAMPLE_STATISTICS: Statistics = {
     },
     earliestVideoWatched: new Date("2021-01-01 00:00:00"),
     latestVideoWatched: new Date("2021-01-01 01:00:00"),
+    mostActiveWeekday: {
+      weekday: "Monday",
+      averageUsageTime: 100,
+    },
   },
   comments: {
     totalComments: 100,
@@ -77,6 +82,8 @@ export const SAMPLE_STATISTICS: Statistics = {
 };
 
 export default class Wrapped {
+  public spotifyPlayer: SpotifyFramePlayer | null = null;
+
   constructor(public userData: TikTokUserData) {}
 
   public getStatistics(): Statistics {

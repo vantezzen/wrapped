@@ -1,12 +1,7 @@
 import React from "react";
 import WrappedContainer, { WrappedSlideProps } from "../WrappedContainer";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import dayjs from "dayjs";
 import { Button } from "@/components/ui/button";
 import getShareUrl from "@/lib/utils/getShareUrl";
@@ -86,6 +81,14 @@ function Roundup({ statistics }: WrappedSlideProps) {
                   {dayjs(statistics.watchSessions.latestVideoWatched).format(
                     "DD/MM/YYYY HH:mm"
                   )}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="text-zinc-400">
+                  Most active weekday
+                </TableCell>
+                <TableCell>
+                  {statistics.watchSessions.mostActiveWeekday.weekday}
                 </TableCell>
               </TableRow>
 

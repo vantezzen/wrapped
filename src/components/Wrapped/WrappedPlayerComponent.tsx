@@ -3,9 +3,15 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import WrappedPlayer from "@/lib/Player/WrappedPlayer";
 import React, { useEffect, useState } from "react";
 import { WrappedSlideProps } from "./WrappedContainer";
+import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
 
-function WrappedPlayerComponent(props: WrappedSlideProps) {
-  const [player] = useState(() => new WrappedPlayer());
+function WrappedPlayerComponent({
+  spotify,
+  ...props
+}: {
+  spotify: SpotifyFramePlayer | null;
+} & WrappedSlideProps) {
+  const [player] = useState(() => new WrappedPlayer(spotify));
   const [, forceUpdateState] = useState(0);
   const forceUpdate = () => forceUpdateState((s) => s + 1);
   useEffect(() => {
@@ -16,6 +22,10 @@ function WrappedPlayerComponent(props: WrappedSlideProps) {
       player.off("update", forceUpdate);
     };
   }, []);
+
+  useEffect(() => {
+    player.spotifyPlayer = spotify;
+  }, [spotify]);
 
   const Component = player.currentSlide?.component || "div";
 
