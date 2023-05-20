@@ -57,47 +57,57 @@ export default class SpotifyFramePlayer {
     });
   }
 
-  public async playSong(uri: string) {
-    if (!this.canPlaySongs) {
-      console.error("User cannot play songs");
-      return;
-    }
-    if (!this.embedController) {
-      console.error("SpotifyFramePlayer not initialized");
-      return;
-    }
+  public playSong(uri: string) {
+    return new Promise<void>(async (resolve) => {
+      if (!this.canPlaySongs) {
+        console.error("User cannot play songs");
+        return resolve();
+      }
+      if (!this.embedController) {
+        console.error("SpotifyFramePlayer not initialized");
+        return resolve();
+      }
 
-    const container = document.getElementById("spotify-wrapper");
-    this.previousIFrame = this.currentIFrame;
-    const frameElement = document.createElement("div");
+      const playTimeout = setTimeout(() => {
+        console.error("Spotify IFrame API timed out");
+        this.canPlaySongs = false;
+        resolve();
+      }, 6000);
 
-    if (container?.firstChild) {
-      // Prepend, otherwise the current iframe will jump
-      // while the new one is loading
-      container!.insertBefore(frameElement, container?.firstChild);
-    } else {
-      container!.appendChild(frameElement);
-    }
+      const container = document.getElementById("spotify-wrapper");
+      this.previousIFrame = this.currentIFrame;
+      const frameElement = document.createElement("div");
 
-    const oembed = await fetch(
-      `https://open.spotify.com/oembed?url=${uri}`
-    ).then((response) => response.json());
+      if (container?.firstChild) {
+        // Prepend, otherwise the current iframe will jump
+        // while the new one is loading
+        container!.insertBefore(frameElement, container?.firstChild);
+      } else {
+        container!.appendChild(frameElement);
+      }
 
-    // Disabling encrypted-media will force playing previews
-    oembed.html = oembed.html.replace("encrypted-media; ", "");
-    frameElement.innerHTML = oembed.html;
+      const oembed = await fetch(
+        `https://open.spotify.com/oembed?url=${uri}`
+      ).then((response) => response.json());
 
-    this.setupNewIframe(frameElement);
+      // Disabling encrypted-media will force playing previews
+      oembed.html = oembed.html.replace("encrypted-media; ", "");
+      frameElement.innerHTML = oembed.html;
 
-    await this.waitForIframe();
+      this.setupNewIframe(frameElement);
 
-    this.embedController.loadUri(uri);
-    this.embedController.resume();
+      await this.waitForIframe();
 
-    setTimeout(() => this.destroyPreviousIFrame(), 1000);
-    await this.waitForSpotify();
+      this.embedController.loadUri(uri);
+      this.embedController.resume();
 
-    this.currentIFrame!.style.opacity = "1";
+      setTimeout(() => this.destroyPreviousIFrame(), 1000);
+      await this.waitForSpotify();
+
+      this.currentIFrame!.style.opacity = "1";
+      clearTimeout(playTimeout);
+      resolve();
+    });
   }
 
   private setupNewIframe(frameElement: HTMLDivElement) {

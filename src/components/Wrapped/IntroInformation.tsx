@@ -27,8 +27,8 @@ function IntroInformation({ onContinue }: { onContinue: () => void }) {
           >
             https://www.tiktok.com/setting/download-your-data
           </a>
-          . This may take a few hours or days, depending on how much data you
-          have on TikTok.
+          . This may take a while, depending on how much data you have on
+          TikTok.
           <br />
           Be sure to choose "<strong>JSON - Machine-readable file</strong>" as
           the file format, otherwise Wrapped for TikTok won't be able to read
