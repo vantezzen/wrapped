@@ -36,10 +36,11 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
     let currentSessionStartTime = null;
     let sessionLengths = [];
 
-    const videoList =
-      this.wrapped.userData.Activity[
-        "Video Browsing History"
-      ].VideoList?.reverse();
+    const videoList = this.wrapped.userData.Activity[
+      "Video Browsing History"
+    ].VideoList?.sort((a, b) => {
+      return new Date(a.Date).getTime() - new Date(b.Date).getTime();
+    });
     if (!videoList) {
       return {
         totalWatchTimeSec: 0,

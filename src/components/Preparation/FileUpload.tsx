@@ -9,7 +9,7 @@ function FileUpload({ onFileSelect }: { onFileSelect: (file: File) => void }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   return (
-    <div className="w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center bg-zinc-900 text-starship-400 dark">
+    <div className="w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center bg-zinc-900 text-starship-400 dark p-6">
       <FatHeading className="text-3xl">
         Select your TikTok
         <br />

@@ -69,7 +69,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                 </TableCell>
                 <TableCell>
                   {dayjs(statistics.watchSessions.earliestVideoWatched).format(
-                    "DD/MM/YYYY HH:mm"
+                    "LLL"
                   )}
                 </TableCell>
               </TableRow>
@@ -79,7 +79,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                 </TableCell>
                 <TableCell>
                   {dayjs(statistics.watchSessions.latestVideoWatched).format(
-                    "DD/MM/YYYY HH:mm"
+                    "LLL"
                   )}
                 </TableCell>
               </TableRow>
@@ -136,7 +136,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                 </TableCell>
                 <TableCell>
                   {dayjs(statistics.likes.dayWithMostLikedPosts.day).format(
-                    "DD/MM/YYYY"
+                    "L"
                   )}{" "}
                   (x
                   {statistics.likes.dayWithMostLikedPosts.count.toLocaleString()}
@@ -148,9 +148,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                   First liked video
                 </TableCell>
                 <TableCell>
-                  {dayjs(statistics.likes.firstLikedVideo.date).format(
-                    "DD/MM/YYYY"
-                  )}
+                  {dayjs(statistics.likes.firstLikedVideo.date).format("L")}
                   <br />
                   <a
                     href={statistics.likes.firstLikedVideo.link}
@@ -180,7 +178,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                 </TableCell>
                 <TableCell>
                   {dayjs(statistics.shares.dayWithMostSharedPosts.day).format(
-                    "DD/MM/YYYY"
+                    "L"
                   )}{" "}
                   (x
                   {statistics.shares.dayWithMostSharedPosts.count.toLocaleString()}
@@ -192,9 +190,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
                   First shared video
                 </TableCell>
                 <TableCell>
-                  {dayjs(statistics.shares.firstSharedVideo.date).format(
-                    "DD/MM/YYYY"
-                  )}
+                  {dayjs(statistics.shares.firstSharedVideo.date).format("L")}
                   <br />
                   <a
                     href={statistics.shares.firstSharedVideo.link}

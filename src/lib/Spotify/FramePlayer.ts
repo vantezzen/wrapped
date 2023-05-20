@@ -1,4 +1,3 @@
-
 export default class SpotifyFramePlayer {
   public embedController: EmbedController | null = null;
   public canPlaySongs = false;
@@ -33,22 +32,21 @@ export default class SpotifyFramePlayer {
             if (this.canPlaySongs) return;
             console.log("Spotify IFrame ready");
             this.canPlaySongs = true;
-
-            // We'll create separate iFrames for each new song to increase
-            // loading speed. Removing the default iFrame will break
-            // the Spotify API, so we'll just hide it instead.
-            const defaultIframe = document
-              .getElementById("spotify-wrapper")
-              ?.querySelector("iframe");
-
-            if (defaultIframe) {
-              defaultIframe.style.opacity = "0";
-              defaultIframe.style.position = "absolute";
-              defaultIframe.style.top = "-1000px";
-            }
-
             this.embedController!.removeListener("ready", enablePlayback);
           };
+
+          // We'll create separate iFrames for each new song to increase
+          // loading speed. Removing the default iFrame will break
+          // the Spotify API, so we'll just hide it instead.
+          const defaultIframe = document
+            .getElementById("spotify-wrapper")
+            ?.querySelector("iframe");
+
+          if (defaultIframe) {
+            defaultIframe.style.opacity = "0";
+            defaultIframe.style.position = "absolute";
+            defaultIframe.style.top = "-1000px";
+          }
 
           this.embedController!.addListener("ready", enablePlayback);
 
@@ -59,7 +57,7 @@ export default class SpotifyFramePlayer {
     });
   }
 
-  public async playSong(uri: string, seekTo: number = 0) {
+  public async playSong(uri: string) {
     if (!this.canPlaySongs) {
       console.error("User cannot play songs");
       return;
@@ -84,6 +82,9 @@ export default class SpotifyFramePlayer {
     const oembed = await fetch(
       `https://open.spotify.com/oembed?url=${uri}`
     ).then((response) => response.json());
+
+    // Disabling encrypted-media will force playing previews
+    oembed.html = oembed.html.replace("encrypted-media; ", "");
     frameElement.innerHTML = oembed.html;
 
     this.setupNewIframe(frameElement);
@@ -92,13 +93,11 @@ export default class SpotifyFramePlayer {
 
     this.embedController.loadUri(uri);
     this.embedController.resume();
+
+    setTimeout(() => this.destroyPreviousIFrame(), 1000);
     await this.waitForSpotify();
 
     this.currentIFrame!.style.opacity = "1";
-    this.destroyPreviousIFrame();
-
-    this.embedController.seek(seekTo);
-    await this.waitForSpotify();
   }
 
   private setupNewIframe(frameElement: HTMLDivElement) {

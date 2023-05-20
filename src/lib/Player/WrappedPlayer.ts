@@ -18,7 +18,6 @@ export type Slide = {
   duration: number;
   spotify?: {
     uri: string;
-    seekTo?: number;
   };
 };
 
@@ -29,7 +28,6 @@ const SLIDES: Slide[] = [
     duration: 6000,
     spotify: {
       uri: "spotify:track:7KA4W4McWYRpgf0fWsJZWB",
-      seekTo: 125,
     },
   },
   {
@@ -43,7 +41,6 @@ const SLIDES: Slide[] = [
     duration: 6000,
     spotify: {
       uri: "spotify:track:6AQbmUe0Qwf5PZnt4HmTXv",
-      seekTo: 28,
     },
   },
   {
@@ -67,7 +64,6 @@ const SLIDES: Slide[] = [
     duration: 6000,
     spotify: {
       uri: "spotify:track:1Qrg8KqiBpW07V7PNxwwwL",
-      seekTo: 10,
     },
   },
   {
@@ -86,7 +82,6 @@ const SLIDES: Slide[] = [
     duration: 6000,
     spotify: {
       uri: "spotify:track:5odlY52u43F5BjByhxg7wg",
-      seekTo: 0,
     },
   },
 ];
@@ -106,10 +101,7 @@ export default class WrappedPlayer extends EventEmitter {
       console.log(`Playing slide`, this.currentSlide, this.spotifyPlayer);
       if (this.currentSlide.spotify && this.spotifyPlayer) {
         console.log(`Playing Spotify song`, this.currentSlide.spotify.uri);
-        await this.spotifyPlayer.playSong(
-          this.currentSlide.spotify.uri,
-          this.currentSlide.spotify.seekTo
-        );
+        await this.spotifyPlayer.playSong(this.currentSlide.spotify.uri);
         console.log(`Loaded spotify song`);
       }
 

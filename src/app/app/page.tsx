@@ -14,6 +14,10 @@ import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
 import SpotifyPlayer from "@/components/Wrapped/SpotifyPlayer";
 import wait from "@/lib/utils/wait";
 import SpotifyInfoText from "@/components/Wrapped/SpotifyInfoText";
+import MutedText from "@/components/Wrapped/MutedText";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+dayjs.extend(localizedFormat);
 
 const WrappedPlayerComponent = dynamic(
   () => import("@/components/Wrapped/WrappedPlayerComponent"),
@@ -40,8 +44,14 @@ function TikTokWrappedAppPage() {
           onFileSelect={async (file) => {
             setPage("loading");
             const creator = new WrappedCreator();
-            const wrapped = await creator.fromFile(file);
-            setWrapped(wrapped);
+            try {
+              const wrapped = await creator.fromFile(file);
+              setWrapped(wrapped);
+            } catch (e) {
+              console.error(e);
+              setPage("error");
+              return;
+            }
 
             const spotify = new SpotifyFramePlayer();
             await spotify.loadLibrary();
@@ -52,6 +62,24 @@ function TikTokWrappedAppPage() {
             setPage(spotify.canPlaySongs ? "ready" : "spotify");
           }}
         />
+      )}
+
+      {page === "error" && (
+        <WrappedContainer>
+          <FatHeading>Something doesn't look right</FatHeading>
+          <MutedText>
+            We couldn't read your TikTok data export. Please make sure you
+            selected the correct file format and try again.
+          </MutedText>
+          <Button
+            onClick={() => {
+              setPage("upload");
+            }}
+          >
+            Try again
+            <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </WrappedContainer>
       )}
 
       {page === "loading" && (

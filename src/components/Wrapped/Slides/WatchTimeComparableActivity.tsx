@@ -17,7 +17,7 @@ function WatchTimeComparableActivity({ statistics }: WrappedSlideProps) {
       </InfoText>
 
       <HideForTime time={500}>
-        <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
+        <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000 delay-500 max-w-xl mx-auto">
           {comparableActivity}
         </FatHeading>
       </HideForTime>

@@ -36,10 +36,7 @@ function Likes({ statistics }: WrappedSlideProps) {
               duration={1}
             />{" "}
             videos on{" "}
-            {dayjs(statistics.likes.dayWithMostLikedPosts.day).format(
-              "DD/MM/YYYY"
-            )}
-            .
+            {dayjs(statistics.likes.dayWithMostLikedPosts.day).format("L")}.
           </InfoText>
         </HideForTime>
       )}

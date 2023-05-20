@@ -6,9 +6,9 @@ export default class WrappedCreator {
   fromFile(file: File): Promise<Wrapped> {
     return new Promise((resolve, reject) => {
       if (file.type === "application/zip") {
-        this.fromZip(file).then(resolve);
+        this.fromZip(file).then(resolve).catch(reject);
       } else {
-        this.fromJSON(file).then(resolve);
+        this.fromJSON(file).then(resolve).catch(reject);
       }
     });
   }

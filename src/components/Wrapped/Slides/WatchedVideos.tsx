@@ -23,7 +23,7 @@ function WatchedVideos({ statistics }: WrappedSlideProps) {
   return (
     <WrappedContainer bg="bg-zinc-900" text="text-starship-400">
       <InfoText className="!text-zinc-200">
-        Since {dayjs(firstWatchedVideo).format("DD/MM/YYYY")} you've watched
+        Since {dayjs(firstWatchedVideo).format("L")} you've watched
       </InfoText>
 
       <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000">
