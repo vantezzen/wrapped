@@ -182,6 +182,7 @@ export const ShareImageDataSchema = z.object({
   averageSessionLength: z.number(),
   mostUsedEmoji: z.string(),
   totalLikes: z.number(),
+  persona: z.string(),
 });
 
 export type TikTokUserData = z.infer<typeof TikTokUserDataSchema>;

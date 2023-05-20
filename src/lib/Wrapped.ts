@@ -6,6 +6,7 @@ import LikesStatistic, {
   LikesStatisticResult,
 } from "./Statistics/LikesStatistic";
 import LiveStatistic, { LiveStatisticResult } from "./Statistics/LiveStatistic";
+import Persona from "./Statistics/Personas/Persona";
 import SharesStatistic, {
   SharesStatisticResult,
 } from "./Statistics/SharesStatistic";
@@ -15,6 +16,10 @@ import WatchSessionsStatistic, {
   WatchSessionsStatisticResult,
 } from "./Statistics/WatchSessionsStatistic";
 import { TikTokUserData } from "./types";
+import defaultPersonas, {
+  TikTokEnjoyer,
+} from "./Statistics/Personas/defaultPersonas";
+import seedrandom from "seedrandom";
 
 export type Statistics = {
   name: string;
@@ -103,5 +108,37 @@ export default class Wrapped {
   ): T {
     const statisticInstance = new statistic(this);
     return statisticInstance.calculateResult();
+  }
+
+  public getPersona(): Persona {
+    const statistics = this.getStatistics();
+    const fittingScores = defaultPersonas.map((persona) => {
+      return {
+        persona,
+        score: persona.getFittingScore(statistics),
+      };
+    });
+
+    const bestFittingPersonas = fittingScores
+      .filter((fittingScore) => {
+        return fittingScore.score > 0.6;
+      })
+      .sort((a, b) => {
+        return b.score - a.score;
+      })
+      .slice(0, 3);
+
+    if (bestFittingPersonas.length === 0) {
+      return new TikTokEnjoyer();
+    }
+
+    console.log(`Best fitting personas`, fittingScores, bestFittingPersonas);
+
+    const rng = seedrandom("hello.");
+    const randomPersonas = bestFittingPersonas.sort(() => {
+      return rng() - 0.5;
+    });
+
+    return randomPersonas[0].persona;
   }
 }

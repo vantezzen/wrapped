@@ -1,8 +1,10 @@
+import Persona from "@/lib/Statistics/Personas/Persona";
 import { Statistics } from "@/lib/Wrapped";
 import React from "react";
 
 export type WrappedSlideProps = {
   statistics: Statistics;
+  persona: Persona;
 };
 
 function WrappedContainer({

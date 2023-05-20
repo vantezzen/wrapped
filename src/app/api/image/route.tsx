@@ -63,6 +63,7 @@ export async function GET(request: Request) {
             marginTop: "120px",
           }}
         >
+          <TableRow title="Persona" value={data.persona} />
           <TableRow
             title="Total videos watched"
             value={data.totalVideosWatched.toLocaleString()}

@@ -11,6 +11,8 @@ import WatchSessionLength from "@/components/Wrapped/Slides/WatchSessionLength";
 import Roundup from "@/components/Wrapped/Slides/Roundup";
 import MostActiveWeekday from "@/components/Wrapped/Slides/MostActiveWeekday";
 import SpotifyFramePlayer from "../Spotify/FramePlayer";
+import Persona from "@/components/Wrapped/Slides/Persona";
+import LongestWatchSession from "@/components/Wrapped/Slides/LongestWatchSession";
 
 export type Slide = {
   name: string;
@@ -59,21 +61,34 @@ const SLIDES: Slide[] = [
     duration: 6000,
   },
   {
-    name: "MostActiveWeekday",
-    component: MostActiveWeekday,
+    name: "LongestWatchSession",
+    component: LongestWatchSession,
     duration: 6000,
     spotify: {
       uri: "spotify:track:1Qrg8KqiBpW07V7PNxwwwL",
     },
   },
   {
+    name: "MostActiveWeekday",
+    component: MostActiveWeekday,
+    duration: 6000,
+  },
+  {
     name: "Comments",
     component: Comments,
     duration: 6000,
+    spotify: {
+      uri: "spotify:track:6UN73IYd0hZxLi8wFPMQij",
+    },
   },
   {
     name: "Likes",
     component: Likes,
+    duration: 6000,
+  },
+  {
+    name: "Persona",
+    component: Persona,
     duration: 6000,
   },
   {

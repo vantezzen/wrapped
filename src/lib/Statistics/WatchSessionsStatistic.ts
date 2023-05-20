@@ -61,8 +61,8 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
     }
 
     let longestWatchSession = {
-      startTime: new Date(videoList[0].Date),
-      endTime: new Date(videoList[0].Date),
+      startTime: new Date(),
+      endTime: new Date(),
       lengthSec: 0,
     };
 
@@ -106,7 +106,9 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
         totalSessions++;
 
         const sessionLength = Math.abs(
-          (videoStartTime.getTime() - currentSessionStartTime.getTime()) / 1000
+          (previousVideoStartTime.getTime() -
+            currentSessionStartTime.getTime()) /
+            1000
         );
         sessionLengths.push(sessionLength);
 
@@ -118,7 +120,7 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
           };
         }
 
-        currentSessionStartTime = null;
+        currentSessionStartTime = videoStartTime;
       }
     }
 

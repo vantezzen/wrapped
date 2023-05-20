@@ -35,7 +35,6 @@ export default class WrappedCreator {
     const jsonFile = Object.values(zip.files)[0];
     const jsonContent = await jsonFile.async("string");
     const content = JSON.parse(jsonContent as string);
-    console.log(content);
     const userData = TikTokUserDataSchema.parse(content);
     return new Wrapped(userData);
   }

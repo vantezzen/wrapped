@@ -1,7 +1,8 @@
+import Persona from "../Statistics/Personas/Persona";
 import { Statistics } from "../Wrapped";
 import { ShareImageData } from "../types";
 
-export default function getShareUrl(statistics: Statistics) {
+export default function getShareUrl(statistics: Statistics, persona: Persona) {
   const data: ShareImageData = {
     name: statistics.name,
     totalWatchTime: statistics.watchSessions.totalWatchTimeSec,
@@ -11,6 +12,7 @@ export default function getShareUrl(statistics: Statistics) {
     averageSessionLength: statistics.watchSessions.averageSessionLengthSec,
     mostUsedEmoji: statistics.comments.mostUsedEmoji.emoji,
     totalLikes: statistics.likes.totalLikes,
+    persona: persona.name,
   };
 
   const url = new URL("/api/image", window.location.href);

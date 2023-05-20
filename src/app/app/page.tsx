@@ -47,6 +47,7 @@ function TikTokWrappedAppPage() {
             try {
               const wrapped = await creator.fromFile(file);
               setWrapped(wrapped);
+              console.log(wrapped.getPersona());
             } catch (e) {
               console.error(e);
               setPage("error");
@@ -114,6 +115,7 @@ function TikTokWrappedAppPage() {
       {page === "play" && (
         <WrappedPlayerComponent
           statistics={wrapped!.getStatistics()}
+          persona={wrapped!.getPersona()}
           spotify={spotify}
         />
       )}

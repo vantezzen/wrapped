@@ -8,12 +8,15 @@ import getShareUrl from "@/lib/utils/getShareUrl";
 import { Loader2, Share2 } from "lucide-react";
 import shareImage from "@/lib/utils/shareImage";
 
-function Roundup({ statistics }: WrappedSlideProps) {
+function Roundup({ statistics, persona }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
     formatTimeLength(statistics.watchSessions.totalWatchTimeSec);
 
   const { amount: averageSessionLengthAmount, unit: averageSessionLengthUnit } =
     formatTimeLength(statistics.watchSessions.averageSessionLengthSec);
+
+  const { amount: longestWatchSessionAmount, unit: longestWatchSessionUnit } =
+    formatTimeLength(statistics.watchSessions.longestWatchSession.lengthSec);
 
   const [isLoadingShareImage, setIsLoadingShareImage] = React.useState(false);
 
@@ -61,6 +64,17 @@ function Roundup({ statistics }: WrappedSlideProps) {
                 <TableCell>
                   {Math.abs(averageSessionLengthAmount)}{" "}
                   {averageSessionLengthUnit}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="text-zinc-400">
+                  Longest watch session
+                </TableCell>
+                <TableCell>
+                  {dayjs(
+                    statistics.watchSessions.longestWatchSession.startTime
+                  ).format("L")}{" "}
+                  ({longestWatchSessionAmount} {longestWatchSessionUnit})
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -224,6 +238,20 @@ function Roundup({ statistics }: WrappedSlideProps) {
                   {statistics.live.totalLiveComments.toLocaleString()}
                 </TableCell>
               </TableRow>
+
+              <TableRow>
+                <TableCell className="text-zinc-400">
+                  <strong className="text-starship-400">Persona</strong>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="text-zinc-400">Your persona</TableCell>
+                <TableCell>{persona.name}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="text-zinc-400">Description</TableCell>
+                <TableCell>{persona.description}</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
 
@@ -231,7 +259,7 @@ function Roundup({ statistics }: WrappedSlideProps) {
             onClick={async () => {
               setIsLoadingShareImage(true);
 
-              const url = getShareUrl(statistics);
+              const url = getShareUrl(statistics, persona);
               await shareImage(url);
 
               setTimeout(() => {
