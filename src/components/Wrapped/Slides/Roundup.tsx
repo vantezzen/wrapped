@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import WrappedContainer, { WrappedSlideProps } from "../WrappedContainer";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
