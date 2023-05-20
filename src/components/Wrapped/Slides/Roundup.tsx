@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WrappedContainer, { WrappedSlideProps } from "../WrappedContainer";
 import formatTimeLength from "@/lib/utils/formatTimeLength";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import getShareUrl from "@/lib/utils/getShareUrl";
 import { Loader2, Share2 } from "lucide-react";
 import shareImage from "@/lib/utils/shareImage";
+import { trackEvent } from "@/lib/analytics";
 
 function Roundup({ statistics, persona }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
@@ -261,6 +262,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
 
               const url = getShareUrl(statistics, persona);
               await shareImage(url);
+              trackEvent("share_image");
 
               setTimeout(() => {
                 setIsLoadingShareImage(false);

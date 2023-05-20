@@ -17,6 +17,7 @@ import SpotifyInfoText from "@/components/Wrapped/SpotifyInfoText";
 import MutedText from "@/components/Wrapped/MutedText";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { trackEvent } from "@/lib/analytics";
 dayjs.extend(localizedFormat);
 
 const WrappedPlayerComponent = dynamic(
@@ -27,7 +28,12 @@ const WrappedPlayerComponent = dynamic(
 );
 
 function TikTokWrappedAppPage() {
-  const [page, setPage] = React.useState("intro");
+  const [page, setPageRaw] = React.useState("intro");
+  const setPage = (page: string) => {
+    setPageRaw(page);
+    window.scrollTo(0, 0);
+    trackEvent("page_" + page);
+  };
   const [wrapped, setWrapped] = React.useState<Wrapped | null>(null);
   const [spotify, setSpotify] = React.useState<SpotifyFramePlayer | null>(null);
 
@@ -49,6 +55,7 @@ function TikTokWrappedAppPage() {
               setWrapped(wrapped);
               console.log(wrapped.getPersona());
             } catch (e) {
+              trackEvent("load_error");
               console.error(e);
               setPage("error");
               return;
@@ -59,6 +66,10 @@ function TikTokWrappedAppPage() {
             setSpotify(spotify);
 
             await wait(5000);
+
+            trackEvent(
+              spotify.canPlaySongs ? "spotify_ready" : "spotify_error"
+            );
 
             setPage(spotify.canPlaySongs ? "ready" : "spotify");
           }}
@@ -75,6 +86,7 @@ function TikTokWrappedAppPage() {
           <Button
             onClick={() => {
               setPage("upload");
+              trackEvent("try_again");
             }}
           >
             Try again
@@ -105,7 +117,12 @@ function TikTokWrappedAppPage() {
             Are you ready to see them?
           </InfoText>
 
-          <Button onClick={() => setPage("play")}>
+          <Button
+            onClick={() => {
+              setPage("play");
+              trackEvent("play");
+            }}
+          >
             Show me!
             <ArrowRight size={16} className="ml-2" />
           </Button>

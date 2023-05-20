@@ -13,6 +13,7 @@ import MostActiveWeekday from "@/components/Wrapped/Slides/MostActiveWeekday";
 import SpotifyFramePlayer from "../Spotify/FramePlayer";
 import Persona from "@/components/Wrapped/Slides/Persona";
 import LongestWatchSession from "@/components/Wrapped/Slides/LongestWatchSession";
+import { trackEvent } from "../analytics";
 
 export type Slide = {
   name: string;
@@ -119,6 +120,7 @@ export default class WrappedPlayer extends EventEmitter {
         await this.spotifyPlayer.playSong(this.currentSlide.spotify.uri);
         console.log(`Loaded spotify song`);
       }
+      trackEvent(`slide-${slide.name}`);
 
       this.emit("update");
       await this.wait(slide.duration);
