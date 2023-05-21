@@ -74,6 +74,22 @@ const items = [
     ),
   },
   {
+    question: "What is this website for?",
+    answer: (
+      <>
+        I always like Spotify Wrapped and wanted to have something similar for
+        TikTok. So I built Wrapped for TikTok, a website that generates a
+        personalized summary of your TikTok usage based on your TikTok data
+        export.
+        <br />
+        <br />
+        Wrapped for TikTok is simply a fun little project and doesn't currently
+        have any monetization or business model behind it. It's just a fun
+        project for me to work on in my free time.
+      </>
+    ),
+  },
+  {
     question: "Can you get access to my TikTok account with my data?",
     answer: (
       <>
@@ -136,6 +152,17 @@ const items = [
         For example, if you watch TikTok videos for 10 minutes, then take a 10
         minute break and then watch TikTok videos for another 10 minutes, this
         will count as two watch sessions.
+      </>
+    ),
+  },
+  {
+    question: "What counts as a 'view'?",
+    answer: (
+      <>
+        On both videos and live stream, a view is counted as soon as the content
+        is displayed - even if you scroll past it directly.
+        <br />
+        This is due to the way TikTok adds items to your watched list.
       </>
     ),
   },
