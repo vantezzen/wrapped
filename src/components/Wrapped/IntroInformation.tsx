@@ -9,6 +9,7 @@ import Faq from "../Preparation/Faq";
 import heroImage from "@/app/hero.png";
 import Image from "next/image";
 import Footer from "../Footer";
+import Projects from "../Projects";
 
 function IntroInformation({
   onContinue,
@@ -88,7 +89,10 @@ function IntroInformation({
       </FatHeading>
       <Faq />
 
+      <Projects />
+
       <MutedText className="max-w-lg mx-auto mt-6 text-sm font-medium text-zinc-600">
+        <strong>For the Search Engines:</strong>
         <p>
           Welcome to Wrapped for TikTok - Your Ultimate Source for TikTok
           Activity Insights:
