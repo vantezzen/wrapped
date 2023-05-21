@@ -12,7 +12,7 @@ function FaqPage() {
 
       <Faq />
 
-      <Link href="/app">
+      <Link href="/">
         <Button>Back to Wrapped for TikTok</Button>
       </Link>
     </WrappedContainer>

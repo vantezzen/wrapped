@@ -38,4 +38,10 @@ export default class WrappedCreator {
     const userData = TikTokUserDataSchema.parse(content);
     return new Wrapped(userData);
   }
+
+  forDemoMode(): Wrapped {
+    const wrapped = new Wrapped({} as any);
+    wrapped.demoMode = true;
+    return wrapped;
+  }
 }

@@ -32,37 +32,37 @@ export type Statistics = {
 };
 
 export const SAMPLE_STATISTICS: Statistics = {
-  name: "John",
-  videoAmountWatched: 1000,
+  name: "John Doe",
+  videoAmountWatched: 81737,
   watchSessions: {
-    totalSessions: 100,
-    totalWatchTimeSec: 10000,
-    averageSessionLengthSec: 100,
+    totalSessions: 1823,
+    totalWatchTimeSec: 60 * 60 * 24 * 29, // 29 days
+    averageSessionLengthSec: 60 * 120, // 120 minutes
     longestWatchSession: {
       startTime: new Date("2021-01-01 00:00:00"),
       endTime: new Date("2021-01-01 01:00:00"),
-      lengthSec: 3600,
+      lengthSec: 60 * 60 * 5,
     },
     earliestVideoWatched: new Date("2021-01-01 00:00:00"),
-    latestVideoWatched: new Date("2021-01-01 01:00:00"),
+    latestVideoWatched: new Date(),
     mostActiveWeekday: {
       weekday: "Monday",
-      averageUsageTime: 100,
+      averageUsageTime: 60 * 60 * 4,
     },
   },
   comments: {
-    totalComments: 100,
-    avgCommentLength: 100,
+    totalComments: 712,
+    avgCommentLength: 29,
     mostUsedEmoji: {
       emoji: "😂",
-      count: 100,
+      count: 521,
     },
   },
   likes: {
-    totalLikes: 100,
+    totalLikes: 8237,
     dayWithMostLikedPosts: {
       day: "2021-01-01",
-      count: 100,
+      count: 92,
     },
     firstLikedVideo: {
       date: "2021-01-01 00:00:00",
@@ -70,10 +70,10 @@ export const SAMPLE_STATISTICS: Statistics = {
     },
   },
   shares: {
-    totalShares: 100,
+    totalShares: 293,
     dayWithMostSharedPosts: {
       day: "2021-01-01",
-      count: 100,
+      count: 12,
     },
     firstSharedVideo: {
       date: "2021-01-01 00:00:00",
@@ -81,17 +81,22 @@ export const SAMPLE_STATISTICS: Statistics = {
     },
   },
   live: {
-    totalLiveComments: 100,
-    totalLiveViewed: 100,
+    totalLiveComments: 121,
+    totalLiveViewed: 823,
   },
 };
 
 export default class Wrapped {
   public spotifyPlayer: SpotifyFramePlayer | null = null;
+  public demoMode = false;
 
   constructor(public userData: TikTokUserData) {}
 
   public getStatistics(): Statistics {
+    if (this.demoMode) {
+      return SAMPLE_STATISTICS;
+    }
+
     return {
       name: this.userData.Profile["Profile Information"].ProfileMap.userName,
       videoAmountWatched: this.caulculateStatistic(VideoAmountWatchedStatistic),
