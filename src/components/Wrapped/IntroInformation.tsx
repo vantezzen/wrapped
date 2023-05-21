@@ -5,6 +5,7 @@ import InfoText from "./InfoText";
 import MutedText from "./MutedText";
 import { Button } from "../ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import Faq from "../Preparation/Faq";
 
 function IntroInformation({ onContinue }: { onContinue: () => void }) {
   return (
@@ -14,11 +15,9 @@ function IntroInformation({ onContinue }: { onContinue: () => void }) {
 
       <div className="max-w-lg mx-auto">
         <MutedText>
-          Wrapped for TikTok uses your TikTok data export to give you
-          personalized stats about your time on TikTok.
+          Wrapped for TikTok gives you stats on your TikTok activity.
           <br />
-          Before you can use Wrapped for TikTok, you need to request your TikTok
-          data export at{" "}
+          To use it, you'll need your TikTok data export from{" "}
           <a
             href="https://www.tiktok.com/setting/download-your-data"
             target="_blank"
@@ -26,13 +25,12 @@ function IntroInformation({ onContinue }: { onContinue: () => void }) {
             className="underline font-bold"
           >
             https://www.tiktok.com/setting/download-your-data
-          </a>
-          . This may take a while, depending on how much data you have on
-          TikTok.
+          </a>{" "}
+          in the "<strong>JSON - Machine-readable file</strong>" file format.
           <br />
-          Be sure to choose "<strong>JSON - Machine-readable file</strong>" as
-          the file format, otherwise Wrapped for TikTok won't be able to read
-          your data.
+          Your exported data does not include login credentials or any other
+          sensitive information. For more info on how to verify this, look at
+          the FAQ section below.
         </MutedText>
       </div>
 
@@ -52,6 +50,8 @@ function IntroInformation({ onContinue }: { onContinue: () => void }) {
           <ArrowRight className="ml-2" size={16} />
         </Button>
       </div>
+
+      <Faq />
     </WrappedContainer>
   );
 }
