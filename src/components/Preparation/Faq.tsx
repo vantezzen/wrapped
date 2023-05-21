@@ -186,7 +186,7 @@ function Faq() {
       className="max-w-lg dark mx-auto text-left"
     >
       {items.map((item) => (
-        <AccordionItem value={item.question}>
+        <AccordionItem value={item.question} key={item.question}>
           <AccordionTrigger className="text-left">
             {item.question}
           </AccordionTrigger>
