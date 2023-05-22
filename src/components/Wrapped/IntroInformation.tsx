@@ -91,6 +91,7 @@ function IntroInformation({
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
+        className="max-w-[80vw]"
       ></iframe>
 
       <FatHeading className="mt-12 mb-6 text-xl">

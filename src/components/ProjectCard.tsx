@@ -15,7 +15,7 @@ function ProjectCard({
 }) {
   return (
     <a href={link} target="_blank" rel="noreferrer" className="h-full">
-      <Card className="dark duration-500 transform hover:scale-[102%] border-none">
+      <Card className="dark duration-500 transform hover:scale-[102%] border-none h-full">
         <CardHeader>
           <Image
             src={image}
@@ -31,7 +31,7 @@ function ProjectCard({
           />
         </CardHeader>
         <CardContent>
-          <h3 className="text-xl font-bold">{title}</h3>
+          <h3 className="text-xl font-bold mb-2">{title}</h3>
           <p className="text-sm">{description}</p>
         </CardContent>
       </Card>
