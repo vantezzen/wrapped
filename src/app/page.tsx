@@ -58,6 +58,8 @@ function TikTokWrappedAppPage() {
 
             await wait(5000);
 
+            trackEvent("demo_ready");
+
             setPage("demo");
           }}
         />
@@ -67,11 +69,14 @@ function TikTokWrappedAppPage() {
         <FileUpload
           onFileSelect={async (file) => {
             setPage("loading");
+            trackEvent("file_selected");
+
             const creator = new WrappedCreator();
             try {
               const wrapped = await creator.fromFile(file);
               setWrapped(wrapped);
-              console.log(wrapped.getPersona());
+
+              trackEvent("file_loaded");
             } catch (e) {
               trackEvent("load_error");
               console.error(e);
@@ -82,12 +87,17 @@ function TikTokWrappedAppPage() {
             const spotify = new SpotifyFramePlayer();
             await spotify.loadLibrary();
             setSpotify(spotify);
+            trackEvent("spotify_loaded");
 
             await wait(5000);
+
+            trackEvent("spotify_check");
 
             trackEvent(
               spotify.canPlaySongs ? "spotify_ready" : "spotify_error"
             );
+
+            trackEvent("opening_player");
 
             setPage(spotify.canPlaySongs ? "ready" : "spotify");
           }}
@@ -128,6 +138,7 @@ function TikTokWrappedAppPage() {
           <Button
             onClick={() => {
               setPage("play");
+              trackEvent("play_demo_click");
             }}
           >
             Play demo
@@ -146,7 +157,12 @@ function TikTokWrappedAppPage() {
       )}
 
       {page === "spotify" && (
-        <SpotifyInfoText onContinue={() => setPage("ready")} />
+        <SpotifyInfoText
+          onContinue={() => {
+            setPage("ready");
+            trackEvent("continue_without_spotify");
+          }}
+        />
       )}
 
       {page === "ready" && (
