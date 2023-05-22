@@ -107,6 +107,15 @@ const items = [
         <br />
         Wrapped for TikTok will never ask you for your TikTok login credentials
         and doesn't require you to enter them anywhere.
+        <br />
+        <br />
+        Depending on your TikTok account data, your data export may contain your
+        email address or phone number. This data is{" "}
+        <strong>not used or transferred</strong> by Wrapped for TikTok!
+        <br />
+        However, if you are concerned about this, you can open your export data
+        in a text editor, search for your email address or phone number and
+        delete it from the file before uploading it to Wrapped for TikTok.
       </>
     ),
   },

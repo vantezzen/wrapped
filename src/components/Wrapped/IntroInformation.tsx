@@ -41,9 +41,8 @@ function IntroInformation({
               in the "<strong>JSON - Machine-readable file</strong>" file
               format.
               <br />
-              Your exported data does not include login credentials or any other
-              sensitive information. For more info on how to verify this, look
-              at the FAQ section below.
+              Your exported data does not include login credentials! For more
+              info on how to verify this, look at the FAQ section below.
             </MutedText>
           </div>
 
@@ -83,6 +82,16 @@ function IntroInformation({
           />
         </div>
       </div>
+
+      <FatHeading className="mt-12 mb-6 text-xl">A quick tutorial</FatHeading>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube-nocookie.com/embed/uIvhVxNJAtc"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
 
       <FatHeading className="mt-12 mb-6 text-xl">
         Frequently Asked Questions
