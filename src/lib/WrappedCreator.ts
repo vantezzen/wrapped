@@ -1,5 +1,5 @@
 import Wrapped from "./Wrapped";
-import { TikTokUserDataSchema } from "./types";
+import { TikTokUserData, TikTokUserDataSchema } from "./types";
 import JSZip from "jszip";
 
 export default class WrappedCreator {
@@ -19,7 +19,7 @@ export default class WrappedCreator {
       reader.onload = (e) => {
         if (e.target?.result) {
           const content = JSON.parse(e.target.result as string);
-          const userData = TikTokUserDataSchema.parse(content);
+          const userData = content as TikTokUserData;
           resolve(new Wrapped(userData));
         } else {
           reject(new Error("Failed to read file"));
@@ -35,7 +35,7 @@ export default class WrappedCreator {
     const jsonFile = Object.values(zip.files)[0];
     const jsonContent = await jsonFile.async("string");
     const content = JSON.parse(jsonContent as string);
-    const userData = TikTokUserDataSchema.parse(content);
+    const userData = content as TikTokUserData;
     return new Wrapped(userData);
   }
 
