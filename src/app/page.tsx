@@ -12,7 +12,6 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import IntroInformation from "@/components/Wrapped/IntroInformation";
 import SpotifyFramePlayer from "@/lib/Spotify/FramePlayer";
 import SpotifyPlayer from "@/components/Wrapped/SpotifyPlayer";
-import wait from "@/lib/utils/wait";
 import SpotifyInfoText from "@/components/Wrapped/SpotifyInfoText";
 import MutedText from "@/components/Wrapped/MutedText";
 import dayjs from "dayjs";
