@@ -22,7 +22,7 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
   // This is the maximum time between videos in seconds that is assumed to be the time
   // the user watched the video. Otherwise is is assumed that the app has been closed
   // and the session has ended.
-  static readonly MAX_TIME_BETWEEN_VIDEOS = 60 * 5;
+  static readonly MAX_TIME_BETWEEN_VIDEOS = 60 * 10;
 
   // At the end of the session (see previous comment) it is assumed that the user
   // watched the last video for this amount of seconds - just to make sure that many

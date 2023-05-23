@@ -13,6 +13,9 @@ import Projects from "@/components/Projects";
 function Roundup({ statistics, persona }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
     formatTimeLength(statistics.watchSessions.totalWatchTimeSec);
+  const totalWatchTimeMins = Math.round(
+    statistics.watchSessions.totalWatchTimeSec / 60
+  );
 
   const { amount: averageSessionLengthAmount, unit: averageSessionLengthUnit } =
     formatTimeLength(statistics.watchSessions.averageSessionLengthSec);
@@ -50,7 +53,8 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                   Total watch time
                 </TableCell>
                 <TableCell>
-                  {totalWatchTimeAmount} {totalWatchTimeUnit}
+                  {totalWatchTimeAmount} {totalWatchTimeUnit} (
+                  {totalWatchTimeMins} minutes)
                 </TableCell>
               </TableRow>
               <TableRow>

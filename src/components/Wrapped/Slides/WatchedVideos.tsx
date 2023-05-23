@@ -13,8 +13,19 @@ const commentsOnVideos = {
   10: "Just getting started, huh?",
   1000: "A light watcher, I see",
   10000: "You're definately getting your watch time in!",
+  15000: "Your attention span is probably slowly degrading, right?",
+  25000: "TikTok addict in the making.",
+  30000:
+    "You've surpassed the average teenager's TikTok intake - so there's that",
+  35000: "TikTok is your second home now, isn't it?",
+  40000: "Your thumbs must be getting tired from all that scrolling.",
   50000: "Might wanna get some fresh air, huh?",
+  60000: "You've reached a new level of TikTok obsession.",
+  75000: "There's a whole world outside TikTok, you know?",
+  85000: "Okay, seriously, take a break.",
   100000: "Damn, when's the last time you saw the sun?",
+  150000: "I know its not my business but you should probably find a hobby.",
+  200000: "Congratulations, you've completed TikTok - maybe go outside next?",
 };
 
 function WatchedVideos({ statistics }: WrappedSlideProps) {
