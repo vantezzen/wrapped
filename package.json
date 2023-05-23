@@ -12,7 +12,7 @@
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.1",
     "@radix-ui/react-slot": "^1.0.1",
-    "@sentry/nextjs": "^7.52.1",
+    "@sentry/nextjs": "^7.53.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "20.2.0",
     "@types/react": "18.2.6",
