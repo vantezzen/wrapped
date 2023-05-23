@@ -18,6 +18,7 @@ import MutedText from "@/components/Wrapped/MutedText";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { trackEvent } from "@/lib/analytics";
+import HideForTime from "@/components/Wrapped/HideForTime";
 dayjs.extend(localizedFormat);
 
 const WrappedPlayerComponent = dynamic(
@@ -56,10 +57,7 @@ function TikTokWrappedAppPage() {
             await spotify.loadLibrary();
             setSpotify(spotify);
 
-            await wait(5000);
-
             trackEvent("demo_ready");
-
             setPage("demo");
           }}
         />
@@ -88,9 +86,6 @@ function TikTokWrappedAppPage() {
             await spotify.loadLibrary();
             setSpotify(spotify);
             trackEvent("spotify_loaded");
-
-            await wait(5000);
-
             trackEvent("spotify_check");
 
             trackEvent(
@@ -159,6 +154,20 @@ function TikTokWrappedAppPage() {
           <InfoText className="text-base">
             We're preparing your Wrapped...
           </InfoText>
+          <HideForTime time={8000}>
+            <MutedText className="text-sm">
+              Uh oh, this is taking longer than expected...
+            </MutedText>
+          </HideForTime>
+          <HideForTime time={15000}>
+            <MutedText className="text-sm text-center">
+              This should've been done by now...
+              <br />
+              If it doesn't start soon try reloading
+              <br />
+              the page and uploading your TikTok data export again.
+            </MutedText>
+          </HideForTime>
         </WrappedContainer>
       )}
 

@@ -1,4 +1,6 @@
-export default class SpotifyFramePlayer {
+import EventEmitter from "events";
+
+export default class SpotifyFramePlayer extends EventEmitter {
   public embedController: EmbedController | null = null;
   public canPlaySongs = false;
 
@@ -15,7 +17,7 @@ export default class SpotifyFramePlayer {
       const timeout = setTimeout(() => {
         resolve();
         console.error("Spotify IFrame API timed out");
-      }, 10000);
+      }, 7000);
 
       window.onSpotifyIframeApiReady = (IFrameAPI: SpotifyIframeApi) => {
         const element = document.getElementById("spotify");
@@ -33,6 +35,10 @@ export default class SpotifyFramePlayer {
             console.log("Spotify IFrame ready");
             this.canPlaySongs = true;
             this.embedController!.removeListener("ready", enablePlayback);
+            this.emit("ready");
+
+            clearTimeout(timeout);
+            resolve();
           };
 
           // We'll create separate iFrames for each new song to increase
@@ -49,9 +55,6 @@ export default class SpotifyFramePlayer {
           }
 
           this.embedController!.addListener("ready", enablePlayback);
-
-          clearTimeout(timeout);
-          resolve();
         });
       };
     });
