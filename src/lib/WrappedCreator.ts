@@ -1,5 +1,5 @@
 import Wrapped from "./Wrapped";
-import { TikTokUserData, TikTokUserDataSchema } from "./types";
+import { TikTokUserData } from "./types";
 import JSZip from "jszip";
 
 export default class WrappedCreator {
