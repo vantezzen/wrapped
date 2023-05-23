@@ -8,7 +8,10 @@ function MutedText({
   className?: string;
 }) {
   return (
-    <p className={`text-zinc-800 font-medium ${className} text-left`}>
+    <p
+      className={`text-zinc-800 font-medium ${className} text-left`}
+      suppressHydrationWarning
+    >
       {children}
     </p>
   );

@@ -19,6 +19,7 @@ function WrappedContainer({
   return (
     <div
       className={`w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center ${bg} ${text} p-6`}
+      suppressHydrationWarning
     >
       {children}
     </div>

@@ -101,7 +101,7 @@ function IntroInformation({
 
       <Projects />
 
-      <MutedText className="max-w-lg mx-auto mt-6 text-sm font-medium text-zinc-600">
+      <div className="max-w-lg mx-auto mt-6 text-sm font-medium text-zinc-600 text-left">
         <strong>For the Search Engines:</strong>
         <p>
           Welcome to Wrapped for TikTok - Your Ultimate Source for TikTok
@@ -153,7 +153,7 @@ function IntroInformation({
           TikTok enthusiasts who use Wrapped for TikTok to deliver accurate,
           reliable, and actionable statistics.
         </p>
-      </MutedText>
+      </div>
 
       <Footer />
     </WrappedContainer>
