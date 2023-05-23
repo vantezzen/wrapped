@@ -5,6 +5,7 @@ import React from "react";
 export type WrappedSlideProps = {
   statistics: Statistics;
   persona: Persona;
+  isDemo: boolean;
 };
 
 function WrappedContainer({
