@@ -68,6 +68,12 @@ function TikTokWrappedAppPage() {
             setPage("loading");
             trackEvent("file_selected");
 
+            if (file.name === "Browsing History.txt") {
+              setPage("text");
+              trackEvent("text_error");
+              return;
+            }
+
             const creator = new WrappedCreator();
             try {
               const wrapped = await creator.fromFile(file);
@@ -112,6 +118,32 @@ function TikTokWrappedAppPage() {
             }}
           >
             Try again
+            <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </WrappedContainer>
+      )}
+
+      {page === "text" && (
+        <WrappedContainer>
+          <FatHeading>Text data exports are not supported yet</FatHeading>
+          <MutedText>
+            It looks like you selected "TXT - Easy-to-read text file" as your
+            file format when requesting your TikTok data export. Unfortunately,
+            Wrapped for TikTok does not support this format yet as it cannot
+            analyze the data inside.
+            <br />
+            <br />
+            Please follow the instructions on the start page to request your
+            data export again and be sure to select "
+            <strong>JSON - Machine-readable</strong>" as the file format.
+          </MutedText>
+          <Button
+            onClick={() => {
+              setPage("intro");
+              trackEvent("text_error_go_back");
+            }}
+          >
+            Go back
             <ArrowRight size={16} className="ml-2" />
           </Button>
         </WrappedContainer>
