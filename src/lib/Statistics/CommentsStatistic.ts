@@ -72,4 +72,15 @@ export default class CommentsStatistic extends Statistic<CommentsStatisticResult
       count: maxEmojiCount,
     };
   }
+
+  getDefaultValue(): CommentsStatisticResult {
+    return {
+      totalComments: 0,
+      avgCommentLength: 0,
+      mostUsedEmoji: {
+        emoji: "🫁",
+        count: 0,
+      },
+    };
+  }
 }

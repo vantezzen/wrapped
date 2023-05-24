@@ -26,4 +26,11 @@ export default class LiveStatistic extends Statistic<LiveStatisticResult> {
       ),
     };
   }
+
+  getDefaultValue(): LiveStatisticResult {
+    return {
+      totalLiveViewed: 0,
+      totalLiveComments: 0,
+    };
+  }
 }

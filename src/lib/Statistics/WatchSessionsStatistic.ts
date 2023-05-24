@@ -152,4 +152,23 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       },
     };
   }
+
+  getDefaultValue(): WatchSessionsStatisticResult {
+    return {
+      totalWatchTimeSec: 0,
+      totalSessions: 0,
+      averageSessionLengthSec: 0,
+      earliestVideoWatched: new Date(),
+      latestVideoWatched: new Date(),
+      longestWatchSession: {
+        startTime: new Date(),
+        endTime: new Date(),
+        lengthSec: 0,
+      },
+      mostActiveWeekday: {
+        weekday: "N/A",
+        averageUsageTime: 0,
+      },
+    };
+  }
 }

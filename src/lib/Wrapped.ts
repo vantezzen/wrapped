@@ -20,6 +20,7 @@ import defaultPersonas, {
   TikTokEnjoyer,
 } from "./Statistics/Personas/defaultPersonas";
 import seedrandom from "seedrandom";
+import * as Sentry from "@sentry/nextjs";
 
 export type Statistics = {
   name: string;
@@ -112,15 +113,42 @@ export default class Wrapped {
     statistic: new (wrapped: Wrapped) => Statistic<T>
   ): T {
     const statisticInstance = new statistic(this);
-    return statisticInstance.calculateResult();
+
+    try {
+      return statisticInstance.calculateResult();
+    } catch (e) {
+      Sentry.captureException(
+        new Error(`Failed to calculate statistic ${statistic.name}`),
+        {
+          extra: {
+            originalException: e,
+          },
+        }
+      );
+      return statisticInstance.getDefaultValue();
+    }
   }
 
   public getPersona(): Persona {
     const statistics = this.getStatistics();
     const fittingScores = defaultPersonas.map((persona) => {
+      let score = 0;
+      try {
+        score = persona.getFittingScore(statistics);
+      } catch (e) {
+        Sentry.captureException(
+          new Error(`Failed to calculate persona ${persona.name}`),
+          {
+            extra: {
+              originalException: e,
+            },
+          }
+        );
+      }
+
       return {
         persona,
-        score: persona.getFittingScore(statistics),
+        score,
       };
     });
 

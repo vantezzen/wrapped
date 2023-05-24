@@ -60,4 +60,18 @@ export default class SharesStatistic extends Statistic<SharesStatisticResult> {
       },
     };
   }
+
+  getDefaultValue(): SharesStatisticResult {
+    return {
+      totalShares: 0,
+      dayWithMostSharedPosts: {
+        day: "",
+        count: 0,
+      },
+      firstSharedVideo: {
+        date: "",
+        link: "",
+      },
+    };
+  }
 }

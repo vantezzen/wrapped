@@ -74,4 +74,18 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
 
     return dayWithMostLikedPosts;
   }
+
+  getDefaultValue(): LikesStatisticResult {
+    return {
+      totalLikes: 0,
+      dayWithMostLikedPosts: {
+        day: "",
+        count: 0,
+      },
+      firstLikedVideo: {
+        date: "",
+        link: "",
+      },
+    };
+  }
 }

@@ -7,4 +7,8 @@ export default class VideoAmountWatchedStatistic extends Statistic<number> {
         ?.length ?? 0
     );
   }
+
+  getDefaultValue(): number {
+    return 0;
+  }
 }
