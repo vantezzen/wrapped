@@ -68,9 +68,16 @@ function TikTokWrappedAppPage() {
             setPage("loading");
             trackEvent("file_selected");
 
-            if (file.name === "Browsing History.txt") {
+            if (file.name.endsWith(".txt")) {
               setPage("text");
               trackEvent("text_error");
+              return;
+            }
+
+            if (!file.name.endsWith(".json") && !file.name.endsWith(".zip")) {
+              setPage("unknown_file");
+              trackEvent("unknown_file_error");
+              trackEvent("unknown_file_error_" + file.name.split(".").pop());
               return;
             }
 
@@ -126,7 +133,7 @@ function TikTokWrappedAppPage() {
       {page === "text" && (
         <WrappedContainer>
           <FatHeading>Text data exports are not supported yet</FatHeading>
-          <MutedText>
+          <MutedText className="max-w-lg mx-auto">
             It looks like you selected "TXT - Easy-to-read text file" as your
             file format when requesting your TikTok data export. Unfortunately,
             Wrapped for TikTok does not support this format yet as it cannot
@@ -136,6 +143,33 @@ function TikTokWrappedAppPage() {
             Please follow the instructions on the start page to request your
             data export again and be sure to select "
             <strong>JSON - Machine-readable</strong>" as the file format.
+            <br />
+            If you modified the file, make sure your file has the correct file
+            extension.
+          </MutedText>
+          <Button
+            onClick={() => {
+              setPage("intro");
+              trackEvent("text_error_go_back");
+            }}
+          >
+            Go back
+            <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </WrappedContainer>
+      )}
+
+      {page === "unknown_file" && (
+        <WrappedContainer>
+          <FatHeading>Unknown file format</FatHeading>
+          <MutedText className="max-w-lg mx-auto">
+            It looks like you selected an unknown file format. Please make sure
+            you select a ".json" or ".zip" file. Make sure you selected "JSON -
+            Machine-readable" as the file format when requesting your TikTok
+            data export.
+            <br />
+            If you modified the file, make sure your file has the correct file
+            extension.
           </MutedText>
           <Button
             onClick={() => {
