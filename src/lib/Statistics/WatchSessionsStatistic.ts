@@ -18,6 +18,8 @@ export type WatchSessionsStatisticResult = {
 };
 
 export default class WatchSessionsStatistic extends Statistic<WatchSessionsStatisticResult> {
+  name = "WatchSessionsStatistic";
+
   // Watch History only contains info about when a video started - not when it ended.
   // This is the maximum time between videos in seconds that is assumed to be the time
   // the user watched the video. Otherwise is is assumed that the app has been closed

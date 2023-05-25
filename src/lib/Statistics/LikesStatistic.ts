@@ -13,6 +13,8 @@ export type LikesStatisticResult = {
 };
 
 export default class LikesStatistic extends Statistic<LikesStatisticResult> {
+  name = "LikesStatistic";
+
   calculateResult(): LikesStatisticResult {
     const likedPosts =
       this.wrapped.userData.Activity["Like List"].ItemFavoriteList?.reverse();

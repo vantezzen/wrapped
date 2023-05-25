@@ -6,6 +6,8 @@ export type LiveStatisticResult = {
 };
 
 export default class LiveStatistic extends Statistic<LiveStatisticResult> {
+  name = "LiveStatistic";
+
   calculateResult(): LiveStatisticResult {
     const livePostsMap =
       this.wrapped.userData["Tiktok Live"]["Watch Live History"].WatchLiveMap;

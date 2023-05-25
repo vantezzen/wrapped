@@ -4,8 +4,11 @@ import JSZip from "jszip";
 import * as Sentry from "@sentry/nextjs";
 
 export default class WrappedCreator {
+  isTextExport = false;
+
   fromFile(file: File): Promise<Wrapped> {
     return new Promise((resolve, reject) => {
+      this.isTextExport = false;
       Sentry.setContext("file", {
         name: file.name,
         size: file.size,
@@ -20,11 +23,16 @@ export default class WrappedCreator {
     });
   }
 
-  private fromJSON(file: File): Promise<Wrapped> {
+  private fromJSON(file: File, isRetry = false): Promise<Wrapped> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target?.result) {
+          if (e.target?.result.toString().startsWith("Date:")) {
+            this.isTextExport = true;
+            return reject(new Error("Text export is not supported"));
+          }
+
           try {
             const content = JSON.parse(e.target.result as string);
             const userData = content as TikTokUserData;
@@ -38,7 +46,11 @@ export default class WrappedCreator {
                 fileType: file.type,
               },
             });
-            this.fromJSON(file).then(resolve).catch(reject);
+            if (!isRetry) {
+              this.fromZip(file, true).then(resolve).catch(reject);
+            } else {
+              reject(e);
+            }
           }
         } else {
           reject(new Error("Failed to read file"));
@@ -48,7 +60,7 @@ export default class WrappedCreator {
     });
   }
 
-  private async fromZip(file: File): Promise<Wrapped> {
+  private async fromZip(file: File, isRetry = false): Promise<Wrapped> {
     try {
       const zip = new JSZip();
       await zip.loadAsync(file);
@@ -66,7 +78,12 @@ export default class WrappedCreator {
           fileType: file.type,
         },
       });
-      throw e;
+
+      if (!isRetry) {
+        return await this.fromJSON(file, true);
+      } else {
+        throw e;
+      }
     }
   }
 

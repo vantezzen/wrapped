@@ -10,6 +10,8 @@ export type CommentsStatisticResult = {
 };
 
 export default class CommentsStatistic extends Statistic<CommentsStatisticResult> {
+  name = "CommentsStatistic";
+
   calculateResult(): CommentsStatisticResult {
     let totalComments = 0;
     let totalCommentLength = 0;

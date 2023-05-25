@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { trackEvent } from "@/lib/analytics";
 import HideForTime from "@/components/Wrapped/HideForTime";
+import * as Sentry from "@sentry/nextjs";
 dayjs.extend(localizedFormat);
 
 const WrappedPlayerComponent = dynamic(
@@ -90,8 +91,34 @@ function TikTokWrappedAppPage() {
             } catch (e) {
               trackEvent("load_error");
               console.error(e);
-              setPage("error");
+              setPage(creator.isTextExport ? "text" : "error");
               return;
+            }
+
+            try {
+              wrapped?.getStatistics();
+            } catch (e) {
+              Sentry.captureException(
+                new Error("Exception when calculating statistics"),
+                {
+                  extra: {
+                    originalError: e,
+                  },
+                }
+              );
+            }
+
+            try {
+              wrapped?.getPersona();
+            } catch (e) {
+              Sentry.captureException(
+                new Error("Exception when calculating persona"),
+                {
+                  extra: {
+                    originalError: e,
+                  },
+                }
+              );
             }
 
             const spotify = new SpotifyFramePlayer();

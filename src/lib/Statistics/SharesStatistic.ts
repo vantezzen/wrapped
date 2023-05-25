@@ -13,6 +13,8 @@ export type SharesStatisticResult = {
 };
 
 export default class SharesStatistic extends Statistic<SharesStatisticResult> {
+  name = "SharesStatistic";
+
   calculateResult(): SharesStatisticResult {
     let dayWithMostSharedPosts = {
       day: "",
