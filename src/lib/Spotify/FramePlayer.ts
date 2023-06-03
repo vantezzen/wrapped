@@ -89,9 +89,20 @@ export default class SpotifyFramePlayer extends EventEmitter {
         container!.appendChild(frameElement);
       }
 
-      const oembed = await fetch(
-        `https://open.spotify.com/oembed?url=${uri}`
-      ).then((response) => response.json());
+      const oembed = await fetch(`https://open.spotify.com/oembed?url=${uri}`)
+        .then((response) => response.json())
+        .catch(() => {
+          console.error("Failed to fetch Spotify oembed");
+          return {
+            html: "",
+          };
+        });
+
+      if (!oembed.html) {
+        this.destroyPreviousIFrame();
+        resolve();
+        return;
+      }
 
       // Disabling encrypted-media will force playing previews
       oembed.html = oembed.html.replace("encrypted-media; ", "");
