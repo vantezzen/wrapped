@@ -1,4 +1,5 @@
 import Statistic from "./Statistic";
+import * as Sentry from "@sentry/nextjs";
 
 export type WatchSessionsStatisticResult = {
   totalWatchTimeSec: number;
@@ -95,7 +96,15 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       ); // in seconds
 
       const weekday = videoStartTime.getDay();
-      weekdaysWithSessions[weekday].add(videoStartTime.toDateString());
+      if (weekdaysWithSessions[weekday]) {
+        weekdaysWithSessions[weekday].add(videoStartTime.toDateString());
+      } else {
+        Sentry.captureException(
+          new Error(
+            `Weekday ${weekday} is not in range 0-6. This should not happen.`
+          )
+        );
+      }
       if (
         timeBetweenVideoWatched < WatchSessionsStatistic.MAX_TIME_BETWEEN_VIDEOS
       ) {
