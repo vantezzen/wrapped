@@ -36,3 +36,5 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
+
+data/dummy-data-*.json

@@ -14,6 +14,7 @@ import SpotifyFramePlayer from "../Spotify/FramePlayer";
 import Persona from "@/components/Wrapped/Slides/Persona";
 import LongestWatchSession from "@/components/Wrapped/Slides/LongestWatchSession";
 import { trackEvent } from "../analytics";
+import { Statistics } from "../Wrapped";
 
 export type Slide = {
   name: string;
@@ -22,6 +23,7 @@ export type Slide = {
   spotify?: {
     uri: string;
   };
+  skip?: (statistics: Statistics) => boolean;
 };
 
 const SLIDES: Slide[] = [
@@ -37,6 +39,7 @@ const SLIDES: Slide[] = [
     name: "WatchedVideos",
     component: WatchedVideos,
     duration: 6000,
+    skip: (statistics) => statistics.videoAmountWatched === 0,
   },
   {
     name: "WatchSessions",
@@ -45,21 +48,26 @@ const SLIDES: Slide[] = [
     spotify: {
       uri: "spotify:track:6AQbmUe0Qwf5PZnt4HmTXv",
     },
+    skip: (statistics) => statistics.watchSessions.totalSessions === 0,
   },
   {
     name: "WatchSessionLength",
     component: WatchSessionLength,
     duration: 6000,
+    skip: (statistics) =>
+      statistics.watchSessions.averageSessionLengthSec === 0,
   },
   {
     name: "TotalWatchTime",
     component: TotalWatchTime,
     duration: 6000,
+    skip: (statistics) => statistics.watchSessions.totalWatchTimeSec === 0,
   },
   {
     name: "WatchTimeComparableActivity",
     component: WatchTimeComparableActivity,
     duration: 6000,
+    skip: (statistics) => statistics.watchSessions.totalWatchTimeSec === 0,
   },
   {
     name: "LongestWatchSession",
@@ -68,11 +76,15 @@ const SLIDES: Slide[] = [
     spotify: {
       uri: "spotify:track:1Qrg8KqiBpW07V7PNxwwwL",
     },
+    skip: (statistics) =>
+      statistics.watchSessions.longestWatchSession.lengthSec === 0,
   },
   {
     name: "MostActiveWeekday",
     component: MostActiveWeekday,
     duration: 6000,
+    skip: (statistics) =>
+      statistics.watchSessions.mostActiveWeekday.averageUsageTime === 0,
   },
   {
     name: "Comments",
@@ -81,16 +93,19 @@ const SLIDES: Slide[] = [
     spotify: {
       uri: "spotify:track:6UN73IYd0hZxLi8wFPMQij",
     },
+    skip: (statistics) => statistics.comments.totalComments === 0,
   },
   {
     name: "Likes",
     component: Likes,
     duration: 6000,
+    skip: (statistics) => statistics.likes.totalLikes === 0,
   },
   {
     name: "Persona",
     component: Persona,
     duration: 6000,
+    skip: (statistics) => statistics.likes.totalLikes === 0,
   },
   {
     name: "Roundup",
@@ -109,9 +124,13 @@ export default class WrappedPlayer extends EventEmitter {
     super();
   }
 
-  public async play() {
+  public async play(statistics: Statistics) {
     for (let i = 0; i < SLIDES.length; i++) {
       const slide = SLIDES[i];
+
+      if (slide.skip && slide.skip(statistics)) {
+        continue;
+      }
 
       this.currentSlide = slide;
       console.log(`Playing slide`, this.currentSlide, this.spotifyPlayer);

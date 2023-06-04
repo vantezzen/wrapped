@@ -83,8 +83,9 @@ function TikTokWrappedAppPage() {
             }
 
             const creator = new WrappedCreator();
+            let wrapped: Wrapped;
             try {
-              const wrapped = await creator.fromFile(file);
+              wrapped = await creator.fromFile(file);
               setWrapped(wrapped);
 
               trackEvent("file_loaded");
@@ -96,7 +97,7 @@ function TikTokWrappedAppPage() {
             }
 
             try {
-              wrapped?.getStatistics();
+              console.log("stats", wrapped?.getStatistics());
             } catch (e) {
               Sentry.captureException(
                 new Error("Exception when calculating statistics"),
@@ -125,15 +126,17 @@ function TikTokWrappedAppPage() {
             await spotify.loadLibrary();
             setSpotify(spotify);
             trackEvent("spotify_loaded");
-            trackEvent("spotify_check");
 
-            trackEvent(
-              spotify.canPlaySongs ? "spotify_ready" : "spotify_error"
-            );
-
-            trackEvent("opening_player");
-
-            setPage(spotify.canPlaySongs ? "ready" : "spotify");
+            if (wrapped.possiblyEmptyExport) {
+              trackEvent("possibly_empty");
+              setPage("possibly_empty");
+            } else if (spotify.canPlaySongs) {
+              trackEvent("spotify_ready");
+              setPage("ready");
+            } else {
+              trackEvent("spotify_error");
+              setPage("spotify");
+            }
           }}
         />
       )}
@@ -152,6 +155,31 @@ function TikTokWrappedAppPage() {
             }}
           >
             Try again
+            <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </WrappedContainer>
+      )}
+
+      {page === "possibly_empty" && (
+        <WrappedContainer>
+          <FatHeading>Missing data in export</FatHeading>
+          <MutedText className="mx-auto max-w-xl">
+            The TikTok data export you uploaded doesn't contain any data about
+            videos watched. This might be because of the country you are using
+            TikTok in or your privacy settings in the app. While we can still
+            show you some statistics, data about your watch history will be
+            blank.
+            <br />
+            We're working on finding a workaround for this issue and will
+            release an update as soon as possible.
+          </MutedText>
+          <Button
+            onClick={() => {
+              setPage("ready");
+              trackEvent("possibly_empty_continue");
+            }}
+          >
+            Continue anyway
             <ArrowRight size={16} className="ml-2" />
           </Button>
         </WrappedContainer>

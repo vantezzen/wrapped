@@ -90,26 +90,36 @@ export const SAMPLE_STATISTICS: Statistics = {
 export default class Wrapped {
   public spotifyPlayer: SpotifyFramePlayer | null = null;
   public demoMode = false;
+  public possiblyEmptyExport = false;
 
-  constructor(public userData: TikTokUserData) {}
+  constructor(public userData: TikTokUserData) {
+    if (
+      !userData.Activity["Video Browsing History"].VideoList ||
+      userData.Activity["Video Browsing History"].VideoList?.length === 0
+    ) {
+      this.possiblyEmptyExport = true;
+    }
+  }
 
   public getStatistics(): Statistics {
+    console.log("Getting statistics", this.userData);
+
     if (this.demoMode) {
       return SAMPLE_STATISTICS;
     }
 
     return {
       name: this.userData.Profile["Profile Information"].ProfileMap.userName,
-      videoAmountWatched: this.caulculateStatistic(VideoAmountWatchedStatistic),
-      watchSessions: this.caulculateStatistic(WatchSessionsStatistic),
-      comments: this.caulculateStatistic(CommentsStatistic),
-      likes: this.caulculateStatistic(LikesStatistic),
-      shares: this.caulculateStatistic(SharesStatistic),
-      live: this.caulculateStatistic(LiveStatistic),
+      videoAmountWatched: this.calculateStatistic(VideoAmountWatchedStatistic),
+      watchSessions: this.calculateStatistic(WatchSessionsStatistic),
+      comments: this.calculateStatistic(CommentsStatistic),
+      likes: this.calculateStatistic(LikesStatistic),
+      shares: this.calculateStatistic(SharesStatistic),
+      live: this.calculateStatistic(LiveStatistic),
     };
   }
 
-  private caulculateStatistic<T>(
+  private calculateStatistic<T>(
     statistic: new (wrapped: Wrapped) => Statistic<T>
   ): T {
     const statisticInstance = new statistic(this);
@@ -125,6 +135,7 @@ export default class Wrapped {
           },
         }
       );
+      console.log(`Failed to calculate statistic ${statistic.name}`, e);
       return statisticInstance.getDefaultValue();
     }
   }

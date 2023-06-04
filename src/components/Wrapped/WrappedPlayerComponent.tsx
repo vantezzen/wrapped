@@ -25,7 +25,7 @@ function WrappedPlayerComponent({
   const forceUpdate = () => forceUpdateState((s) => s + 1);
   useEffect(() => {
     player.on("update", forceUpdate);
-    player.play();
+    player.play(props.statistics);
 
     return () => {
       player.off("update", forceUpdate);
