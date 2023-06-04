@@ -1,5 +1,5 @@
 import Wrapped from "./Wrapped";
-import { TikTokUserData } from "./types";
+import { TikTokUserData, TikTokUserDataSchema } from "./types";
 import JSZip from "jszip";
 import * as Sentry from "@sentry/nextjs";
 
@@ -36,6 +36,7 @@ export default class WrappedCreator {
           try {
             const content = JSON.parse(e.target.result as string);
             const userData = content as TikTokUserData;
+            this.investigateSchema(userData);
             resolve(new Wrapped(userData));
           } catch (e) {
             Sentry.captureException(new Error("Cannot read JSON file"), {
@@ -68,6 +69,7 @@ export default class WrappedCreator {
       const jsonContent = await jsonFile.async("string");
       const content = JSON.parse(jsonContent as string);
       const userData = content as TikTokUserData;
+      this.investigateSchema(userData);
       return new Wrapped(userData);
     } catch (e) {
       Sentry.captureException(new Error("Cannot read ZIP file"), {
@@ -91,5 +93,17 @@ export default class WrappedCreator {
     const wrapped = new Wrapped({} as any);
     wrapped.demoMode = true;
     return wrapped;
+  }
+
+  private investigateSchema(content: any) {
+    const parsed = TikTokUserDataSchema.safeParse(content);
+    if (!parsed.success) {
+      // Log schema errors to Sentry
+      Sentry.captureException(new Error("Schema validation failed"), {
+        extra: {
+          errors: parsed.error,
+        },
+      });
+    }
   }
 }

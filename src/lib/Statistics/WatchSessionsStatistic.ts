@@ -101,7 +101,7 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
       } else {
         Sentry.captureException(
           new Error(
-            `Weekday ${weekday} (${video.Date}) is not in range 0-6. This should not happen.`
+            `Weekday ${weekday} ("${video.Date}") is not in range 0-6. This should not happen.`
           )
         );
       }
