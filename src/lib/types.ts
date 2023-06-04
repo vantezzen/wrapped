@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const TikTokFavouriteElementSchema = z.object({
   Date: z.string(),
-  Link: z.string().optional(),
+  Link: z.string().optional().nullable(),
 });
 
 export const TikTokUserSchema = z.object({
@@ -115,13 +115,15 @@ export const TikTokActivityDataSchema = z.object({
       .nullable()
       .optional(),
   }),
-  "Most Recent Location Data": z.object({
-    LocationData: z.object({
-      Date: z.string(),
-      GpsData: z.string(),
-      LastRegion: z.string(),
-    }),
-  }),
+  "Most Recent Location Data": z
+    .object({
+      LocationData: z.object({
+        Date: z.string(),
+        GpsData: z.string(),
+        LastRegion: z.string(),
+      }),
+    })
+    .optional(),
   "Purchase History": z.object({}),
   "Search History": z.object({
     SearchList: z.array(TikTokSeachHistoryElementSchema).nullable().optional(),
@@ -154,7 +156,7 @@ export const TikTokUserDataSchema = z.object({
   }),
   "Tiktok Live": z.object({
     "Watch Live History": z.object({
-      WatchLiveMap: z.record(TikTokWatchLiveElementSchema),
+      WatchLiveMap: z.record(TikTokWatchLiveElementSchema).optional(),
     }),
   }),
   Video: z.object({
