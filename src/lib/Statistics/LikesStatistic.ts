@@ -53,7 +53,7 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
       dayWithMostLikedPosts: mostLikedDay,
       firstLikedVideo: {
         date: likedPosts[0].Date,
-        link: likedPosts[0].Link,
+        link: likedPosts[0].Link ?? "",
       },
     };
   }
