@@ -31,9 +31,9 @@ export const TikTokSeachHistoryElementSchema = z.object({
 
 export const TikTokShareHistoryElementSchema = z.object({
   Date: z.string(),
-  SharedContent: z.enum(["video", "profile", "sound", "hashtag"]),
+  SharedContent: z.string(),
   Link: z.string(),
-  Method: z.enum(["copy", "share", "save", "more", "chat_head"]),
+  Method: z.string(),
 });
 
 export const TikTokStatusElementSchema = z.object({
