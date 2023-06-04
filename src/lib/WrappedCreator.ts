@@ -15,7 +15,15 @@ export default class WrappedCreator {
         type: file.type,
       });
 
-      if (file.type === "application/zip" || file.name.endsWith(".zip")) {
+      if (
+        [
+          "application/zip",
+          "application/x-zip-compressed",
+          "multipart/x-zip",
+          "application/x-compressed",
+        ].includes(file.type) ||
+        file.name.endsWith(".zip")
+      ) {
         this.fromZip(file).then(resolve).catch(reject);
       } else {
         this.fromJSON(file).then(resolve).catch(reject);
