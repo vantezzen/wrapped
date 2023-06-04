@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const TikTokFavouriteElementSchema = z.object({
   Date: z.string(),
-  Link: z.string(),
+  Link: z.string().optional(),
 });
 
 export const TikTokUserSchema = z.object({
