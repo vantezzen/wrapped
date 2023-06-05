@@ -94,8 +94,9 @@ export default class Wrapped {
 
   constructor(public userData: TikTokUserData) {
     if (
-      !userData.Activity["Video Browsing History"].VideoList ||
-      userData.Activity["Video Browsing History"].VideoList?.length === 0
+      userData.Activity &&
+      (!userData.Activity["Video Browsing History"].VideoList ||
+        userData.Activity["Video Browsing History"].VideoList?.length === 0)
     ) {
       this.possiblyEmptyExport = true;
     }
