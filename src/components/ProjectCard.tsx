@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import Image from "next/image";
+import { trackEvent } from "@/lib/analytics";
 
 function ProjectCard({
   title,
@@ -14,7 +15,17 @@ function ProjectCard({
   link: string;
 }) {
   return (
-    <a href={link} target="_blank" rel="noreferrer" className="h-full">
+    <a
+      href={link}
+      target="_blank"
+      rel="noreferrer"
+      className="h-full"
+      onClick={() => {
+        trackEvent(
+          "project_card_click_" + title.toLowerCase().replace(" ", "_")
+        );
+      }}
+    >
       <Card className="dark duration-500 transform hover:scale-[102%] border-none h-full">
         <CardHeader>
           <Image
