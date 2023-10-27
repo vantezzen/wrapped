@@ -8,7 +8,7 @@ function Projects() {
       <div className="grid grid-cols-2 md:grid-cols-4 mt-6 gap-8">
         <ProjectCard
           title="Purrsona"
-          description="Feline Grrovy - Let AI create a Spotify playlist for your pet"
+          description="Feline Groovy? Let AI create a Spotify playlist for your pet"
           image="/projects/purrsona.png"
           link="https://purrsona.vantezzen.io"
         />
