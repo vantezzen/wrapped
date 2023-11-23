@@ -35,6 +35,10 @@ export default function RootLayout({
             referrerPolicy="no-referrer-when-downgrade"
           />
         </noscript>
+        <Script
+          data-domain="wrapped.vantezzen.io"
+          src="https://plausible.io/js/script.js"
+        />
 
         <Script
           async
