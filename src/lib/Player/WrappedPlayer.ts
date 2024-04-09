@@ -15,6 +15,7 @@ import Persona from "@/components/Wrapped/Slides/Persona";
 import LongestWatchSession from "@/components/Wrapped/Slides/LongestWatchSession";
 import { trackEvent } from "../analytics";
 import { Statistics } from "../Wrapped";
+import TotalStorage from "@/components/Wrapped/Slides/TotalStorage";
 
 export type Slide = {
   name: string;
@@ -78,6 +79,12 @@ const SLIDES: Slide[] = [
     },
     skip: (statistics) =>
       statistics.watchSessions.longestWatchSession.lengthSec === 0,
+  },
+  {
+    name: "TotalStorage",
+    component: TotalStorage,
+    duration: 7000,
+    skip: (statistics) => statistics.watchSessions.totalWatchTimeSec === 0,
   },
   {
     name: "MostActiveWeekday",
