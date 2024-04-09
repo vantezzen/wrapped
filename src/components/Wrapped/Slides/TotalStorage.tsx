@@ -7,7 +7,7 @@ import HideForTime from "../HideForTime";
 import lookup from "@/lib/utils/lookup";
 
 const gbPerYear = {
-  [0.1]: 1960,
+  0: 1960,
   1: 1967,
   2: 1969,
   3: 1970,
