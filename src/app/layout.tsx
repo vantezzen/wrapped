@@ -9,6 +9,8 @@ export const metadata = {
   description: "Get insights into your time on TikTok 🚀",
 };
 
+const PLAUSIBLE_EVENTS = "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
+
 export default function RootLayout({
   children,
 }: {
@@ -37,7 +39,7 @@ export default function RootLayout({
         </noscript>
         <Script
           data-domain="wrapped.vantezzen.io"
-          src="https://plausible.io/js/script.tagged-events.js"
+          src="https://a.vantezzen.io/js/script.tagged-events.js"
         />
 
         <Script
@@ -45,6 +47,8 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8508732166185621"
           crossOrigin="anonymous"
         ></Script>
+
+        <script dangerouslySetInnerHTML={{__html: PLAUSIBLE_EVENTS}}></script>
       </body>
     </html>
   );
