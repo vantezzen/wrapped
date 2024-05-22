@@ -7,6 +7,12 @@ function Projects() {
       <p className="font-bold text-lg">Check out my other projects:</p>
       <div className="grid grid-cols-2 md:grid-cols-4 mt-6 gap-8">
         <ProjectCard
+          title="SparkTunes"
+          description="A 'Top Trumps'-style game that lets you play with your Spotify music"
+          image="/projects/sparktunes.png"
+          link="https://sparktunes.vantezzen.io"
+        />
+        <ProjectCard
           title="Roast Me, Robert"
           description="Let Robert roast your selfies with AI"
           image="/projects/robert.webp"
@@ -42,12 +48,12 @@ function Projects() {
           image="/projects/wonderrail.png"
           link="https://wonderrail.com"
         />
-        <ProjectCard
+        {/* <ProjectCard
           title="Melody Mayhem"
           description="Let your Spotify playlists battle it out!"
           image="/projects/melodymayhem.png"
           link="https://melody-mayhem.vantezzen.io/"
-        />
+        /> */}
         {/* <ProjectCard
           title="neonFin"
           description="Discover Your Hidden Spending Habits"
