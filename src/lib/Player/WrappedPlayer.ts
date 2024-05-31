@@ -67,7 +67,7 @@ const SLIDES: Slide[] = [
   {
     name: "WatchTimeComparableActivity",
     component: WatchTimeComparableActivity,
-    duration: 6000,
+    duration: 8000,
     skip: (statistics) => statistics.watchSessions.totalWatchTimeSec === 0,
   },
   {
