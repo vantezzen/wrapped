@@ -4,7 +4,7 @@ import MutedText from "./Wrapped/MutedText";
 
 function Footer() {
   return (
-    <div>
+    <div className="text-center">
       <a
         href="https://vantezzen.io"
         target="_blank"

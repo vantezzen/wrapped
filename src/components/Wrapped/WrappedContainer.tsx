@@ -1,6 +1,7 @@
 import Persona from "@/lib/Statistics/Personas/Persona";
 import { Statistics } from "@/lib/Wrapped";
 import React from "react";
+import { motion } from "framer-motion";
 
 export type WrappedSlideProps = {
   statistics: Statistics;
@@ -10,7 +11,7 @@ export type WrappedSlideProps = {
 
 function WrappedContainer({
   children,
-  bg = "bg-starship-400",
+  bg = "bg-white",
   text = "text-zinc-900",
 }: {
   children: React.ReactNode;
@@ -18,12 +19,13 @@ function WrappedContainer({
   text?: string;
 }) {
   return (
-    <div
-      className={`w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center ${bg} ${text} p-6`}
+    <motion.div
+      className={`min-h-screen flex justify-center items-center flex-col gap-6 ${bg} ${text}`}
       suppressHydrationWarning
+      layoutId="wrapped-container"
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

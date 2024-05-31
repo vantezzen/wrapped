@@ -19,6 +19,8 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { trackEvent } from "@/lib/analytics";
 import HideForTime from "@/components/Wrapped/HideForTime";
 import * as Sentry from "@sentry/nextjs";
+import HowToGetFile from "@/components/Preparation/HowToGetFile";
+import Serif from "@/components/Serif";
 dayjs.extend(localizedFormat);
 
 const WrappedPlayerComponent = dynamic(
@@ -44,7 +46,7 @@ function TikTokWrappedAppPage() {
 
       {page === "intro" && (
         <IntroInformation
-          onContinue={() => setPage("upload")}
+          onContinue={() => setPage("howto")}
           onDemo={async () => {
             trackEvent("demo");
             setPage("loading");
@@ -61,6 +63,10 @@ function TikTokWrappedAppPage() {
             setPage("demo");
           }}
         />
+      )}
+
+      {page === "howto" && (
+        <HowToGetFile onContinue={() => setPage("upload")} />
       )}
 
       {page === "upload" && (
@@ -143,74 +149,102 @@ function TikTokWrappedAppPage() {
 
       {page === "error" && (
         <WrappedContainer>
-          <FatHeading>Something doesn't look right</FatHeading>
-          <MutedText>
-            We couldn't read your TikTok data export. Please make sure you
-            selected the correct file format and try again.
-          </MutedText>
-          <Button
-            onClick={() => {
-              setPage("upload");
-              trackEvent("try_again");
-            }}
-          >
-            Try again
-            <ArrowRight size={16} className="ml-2" />
-          </Button>
+          <div className="p-12 rounded-xl bg-brand-dark overflow-hidden max-w-xl mx-auto">
+            <Serif>
+              <h1 className="text-4xl md:text-5xl font-bold">
+                Something doesn't look right
+              </h1>
+            </Serif>
+
+            <InfoText className="mt-6">
+              We couldn't read your TikTok data export. Please make sure you
+              selected the correct file format and try again.
+            </InfoText>
+
+            <Button
+              onClick={() => {
+                setPage("upload");
+                trackEvent("try_again");
+              }}
+              className="mt-6 w-full"
+            >
+              Try again
+            </Button>
+          </div>
         </WrappedContainer>
       )}
 
       {page === "possibly_empty" && (
         <WrappedContainer>
-          <FatHeading>Missing data in export</FatHeading>
-          <MutedText className="mx-auto max-w-xl">
-            The TikTok data export you uploaded doesn't contain any data about
-            videos watched. This might be because of the country you are using
-            TikTok in or your privacy settings in the app. While we can still
-            show you some statistics, data about your watch history will be
-            blank.
-            <br />
-            We're working on finding a workaround for this issue and will
-            release an update as soon as possible.
-          </MutedText>
-          <Button
-            onClick={() => {
-              setPage("ready");
-              trackEvent("possibly_empty_continue");
-            }}
-          >
-            Continue anyway
-            <ArrowRight size={16} className="ml-2" />
-          </Button>
+          <div className="p-12 rounded-xl bg-brand-dark overflow-hidden max-w-xl mx-auto">
+            <Serif>
+              <h1 className="text-4xl md:text-5xl font-bold">
+                Missing data in export
+              </h1>
+            </Serif>
+
+            <InfoText className="mt-6">
+              The TikTok data export you uploaded doesn't contain any data about
+              videos watched. This might be because of the country you are using
+              TikTok in or your privacy settings in the app. While we can still
+              show you some statistics, data about your watch history will be
+              blank.
+            </InfoText>
+            <InfoText className="mt-3">
+              We're working on finding a workaround for this issue and will
+              release an update as soon as possible.
+            </InfoText>
+
+            <Button
+              onClick={() => {
+                setPage("ready");
+                trackEvent("possibly_empty_continue");
+              }}
+              className="mt-6 w-full"
+            >
+              Continue anyway
+              <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
         </WrappedContainer>
       )}
 
       {page === "text" && (
         <WrappedContainer>
-          <FatHeading>Text data exports are not supported yet</FatHeading>
-          <MutedText className="max-w-lg mx-auto">
-            It looks like you selected "TXT - Easy-to-read text file" as your
-            file format when requesting your TikTok data export. Unfortunately,
-            Wrapped for TikTok does not support this format yet as it cannot
-            analyze the data inside.
-            <br />
-            <br />
-            Please follow the instructions on the start page to request your
-            data export again and be sure to select "
-            <strong>JSON - Machine-readable</strong>" as the file format.
-            <br />
-            If you modified the file, make sure your file has the correct file
-            extension.
-          </MutedText>
-          <Button
-            onClick={() => {
-              setPage("intro");
-              trackEvent("text_error_go_back");
-            }}
-          >
-            Go back
-            <ArrowRight size={16} className="ml-2" />
-          </Button>
+          <div className="p-12 rounded-xl bg-brand-dark overflow-hidden max-w-xl mx-auto">
+            <Serif>
+              <h1 className="text-4xl md:text-5xl font-bold">
+                Text data exports are not supported yet
+              </h1>
+            </Serif>
+
+            <InfoText className="mt-6">
+              It looks like you selected "TXT - Easy-to-read text file" as your
+              file format when requesting your TikTok data export.
+              Unfortunately, Wrapped for TikTok does not support this format yet
+              as it cannot analyze the data inside.
+            </InfoText>
+            <InfoText className="mt-3">
+              Please follow the instructions on the start page to request your
+              data export again and be sure to select "
+              <strong>JSON - Machine-readable</strong>" as the file format.
+            </InfoText>
+            <InfoText className="mt-3">
+              If you modified the file, make sure your file has the correct file
+              extension.
+            </InfoText>
+
+            <Button
+              onClick={() => {
+                setPage("intro");
+                trackEvent("text_error_go_back");
+              }}
+              className="mt-6 w-full"
+            >
+              Go back
+              <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
         </WrappedContainer>
       )}
 
@@ -240,31 +274,36 @@ function TikTokWrappedAppPage() {
 
       {page === "demo" && (
         <WrappedContainer>
-          <FatHeading>View Demo Wrapped</FatHeading>
-          <MutedText className="max-w-xl mx-auto">
-            You can view a demo of Wrapped for TikTok with sample data if you
-            want to.
-            <br />
-            <strong>
-              This is NOT your Wrapped, but a demo of what it could look like.
-              <br />
-              It does not use your TikTok data export.
-            </strong>
-            <br />
-            <br />
-            The data is randomly generated and does not represent any real
-            TikTok user - if you want to see your own Wrapped, you can reload
-            the page at any time and upload your own data export.
-          </MutedText>
-          <Button
-            onClick={() => {
-              setPage("play");
-              trackEvent("play_demo_click");
-            }}
-          >
-            Play demo
-            <ArrowRight size={16} className="ml-2" />
-          </Button>
+          <div className="p-12 rounded-xl bg-brand-dark overflow-hidden max-w-xl mx-auto">
+            <Serif>
+              <h1 className="text-4xl md:text-5xl font-bold">
+                View Demo Wrapped
+              </h1>
+            </Serif>
+
+            <InfoText className="mt-6">
+              You can view a demo of Wrapped for TikTok with sample data if you
+              want to.
+            </InfoText>
+            <InfoText className="mt-3">
+              <strong>
+                This is NOT your Wrapped, but a demo of what it could look like.
+                <br />
+                It does not use your TikTok data export.
+              </strong>
+            </InfoText>
+
+            <Button
+              onClick={() => {
+                setPage("play");
+                trackEvent("play_demo_click");
+              }}
+              className="mt-6 w-full"
+            >
+              Play demo
+              <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
         </WrappedContainer>
       )}
 
@@ -302,22 +341,29 @@ function TikTokWrappedAppPage() {
 
       {page === "ready" && (
         <WrappedContainer>
-          <FatHeading>Your Wrapped is ready!</FatHeading>
-          <InfoText>
-            We've crunched the numbers and found some...interesting insights.
-            <br />
-            Are you ready to see them?
-          </InfoText>
+          <div className="p-12 rounded-xl bg-brand-light overflow-hidden max-w-xl mx-auto">
+            <Serif>
+              <h1 className="text-4xl md:text-5xl font-bold">
+                Your Wrapped is ready!
+              </h1>
+            </Serif>
 
-          <Button
-            onClick={() => {
-              setPage("play");
-              trackEvent("play");
-            }}
-          >
-            Show me!
-            <ArrowRight size={16} className="ml-2" />
-          </Button>
+            <InfoText className="mt-6">
+              We've crunched the numbers and found some...interesting insights.
+            </InfoText>
+            <InfoText className="mt-3">Are you ready to see them?</InfoText>
+
+            <Button
+              onClick={() => {
+                setPage("play");
+                trackEvent("play");
+              }}
+              className="mt-6 w-full"
+            >
+              Show me!
+              <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
         </WrappedContainer>
       )}
 
