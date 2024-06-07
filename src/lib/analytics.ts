@@ -3,6 +3,7 @@ export function trackEvent(name: string) {
     try {
       window.sa_event(name);
       window.plausible(name);
+      window.gtag("event", name);
     } catch (e) {
       console.error(e);
     }
