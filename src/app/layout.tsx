@@ -1,6 +1,7 @@
 import Script from "next/script";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,7 +10,8 @@ export const metadata = {
   description: "Get insights into your time on TikTok 🚀",
 };
 
-const PLAUSIBLE_EVENTS = "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
+const PLAUSIBLE_EVENTS =
+  "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
 
 export default function RootLayout({
   children,
@@ -48,7 +50,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></Script>
 
-        <script dangerouslySetInnerHTML={{__html: PLAUSIBLE_EVENTS}}></script>
+        <GoogleAnalytics gaId="G-9C99MWZ0PM" />
+
+        <script dangerouslySetInnerHTML={{ __html: PLAUSIBLE_EVENTS }}></script>
       </body>
     </html>
   );
