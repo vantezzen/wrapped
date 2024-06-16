@@ -23,7 +23,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png" />
       </head>
 
-      <body className={`${inter.className} w-screen min-h-screen`}>
+      <body
+        className={`${inter.className} w-screen min-h-screen overflow-x-hidden`}
+      >
         {children}
 
         <Script
