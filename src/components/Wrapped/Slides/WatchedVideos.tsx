@@ -6,6 +6,7 @@ import FatHeading from "../FatHeading";
 import CountUp from "react-countup";
 import HideForTime from "../HideForTime";
 import lookup from "@/lib/utils/lookup";
+import VideoWall from "@/components/ui/video-wall";
 
 const commentsOnVideos = {
   0: "Not a single one?",
@@ -33,18 +34,19 @@ function WatchedVideos({ statistics }: WrappedSlideProps) {
 
   return (
     <WrappedContainer bg="bg-zinc-900" text="text-starship-400">
-      <InfoText className="!text-zinc-200">
+      <VideoWall />
+      <InfoText className="!text-zinc-200 z-10">
         Since {dayjs(firstWatchedVideo).format("L")} you've watched
       </InfoText>
 
-      <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000">
+      <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000 z-10">
         <CountUp end={statistics.videoAmountWatched} duration={2} />
         <br />
         videos
       </FatHeading>
 
       <HideForTime time={500}>
-        <InfoText className="!text-zinc-200 animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
+        <InfoText className="!text-zinc-200 animate-in slide-in-from-bottom fade-in duration-1000 delay-500 z-10">
           {lookup(statistics.videoAmountWatched, commentsOnVideos)}
         </InfoText>
       </HideForTime>

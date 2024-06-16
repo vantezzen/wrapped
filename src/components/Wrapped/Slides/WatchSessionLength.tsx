@@ -15,7 +15,7 @@ function WatchSessionLength({ statistics }: WrappedSlideProps) {
       <InfoText className="!text-zinc-200 animate-in slide-in-from-bottom fade-in duration-1000">
         When you open TikTok, on average you spend
       </InfoText>
-      <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000">
+      <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000 text-center">
         <CountUp end={amount} duration={2} />
         <br />
         {unit}

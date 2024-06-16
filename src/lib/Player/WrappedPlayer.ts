@@ -67,7 +67,7 @@ const SLIDES: Slide[] = [
   {
     name: "WatchTimeComparableActivity",
     component: WatchTimeComparableActivity,
-    duration: 6000,
+    duration: 8000,
     skip: (statistics) => statistics.watchSessions.totalWatchTimeSec === 0,
   },
   {
@@ -126,31 +126,83 @@ const SLIDES: Slide[] = [
 
 export default class WrappedPlayer extends EventEmitter {
   public currentSlide: Slide | null = null;
+  public statistics: Statistics | null = null;
+  public autoAdvance = true;
 
   constructor(public spotifyPlayer: SpotifyFramePlayer | null = null) {
     super();
   }
 
   public async play(statistics: Statistics) {
-    for (let i = 0; i < SLIDES.length; i++) {
-      const slide = SLIDES[i];
+    this.statistics = statistics;
+    this.nextSlide();
+  }
 
-      if (slide.skip && slide.skip(statistics)) {
-        continue;
-      }
+  public async nextSlide() {
+    const currentIndex = this.currentSlide
+      ? SLIDES.indexOf(this.currentSlide)
+      : -1;
+    const nextIndex = currentIndex + 1;
 
-      this.currentSlide = slide;
-      console.log(`Playing slide`, this.currentSlide, this.spotifyPlayer);
-      if (this.currentSlide.spotify && this.spotifyPlayer) {
-        console.log(`Playing Spotify song`, this.currentSlide.spotify.uri);
-        await this.spotifyPlayer.playSong(this.currentSlide.spotify.uri);
-        console.log(`Loaded spotify song`);
-      }
-      trackEvent(`slide-${slide.name}`);
-
-      this.emit("update");
-      await this.wait(slide.duration);
+    if (nextIndex >= SLIDES.length) {
+      return;
     }
+
+    const nextSlide = SLIDES[nextIndex];
+    this.currentSlide = nextSlide;
+
+    if (nextSlide.skip && nextSlide.skip(this.statistics!)) {
+      // Directly skip to the next slide if the current slide should be skipped
+      await this.nextSlide();
+      return;
+    }
+
+    if (this.currentSlide.spotify && this.spotifyPlayer) {
+      await this.spotifyPlayer.playSong(this.currentSlide.spotify.uri);
+    }
+    trackEvent(`slide-${nextSlide.name}`);
+
+    this.emit("update");
+
+    await this.wait(nextSlide.duration);
+    if (this.currentSlide === nextSlide && this.autoAdvance) {
+      // If the slide hasn't changed, automatically go to the next one
+      await this.nextSlide();
+    }
+  }
+
+  public async previousSlide() {
+    if (!this.currentSlide) {
+      return;
+    }
+
+    const currentIndex = SLIDES.indexOf(this.currentSlide);
+    const previousIndex = currentIndex - 1;
+
+    if (previousIndex < 0) {
+      return;
+    }
+
+    const previousSlide = SLIDES[previousIndex];
+    this.currentSlide = previousSlide;
+
+    if (previousSlide.skip && previousSlide.skip(this.statistics!)) {
+      // Directly skip to the previous slide if the current slide should be skipped
+      await this.previousSlide();
+      return;
+    }
+
+    if (this.currentSlide.spotify && this.spotifyPlayer) {
+      this.spotifyPlayer.playSong(this.currentSlide.spotify.uri);
+    }
+    trackEvent(`slide-${previousSlide.name}`);
+
+    this.emit("update");
+
+    // await this.wait(previousSlide.duration);
+    // if (this.currentSlide === previousSlide) {
+    //   await this.nextSlide();
+    // }
   }
 
   private wait(ms: number) {

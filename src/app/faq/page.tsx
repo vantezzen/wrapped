@@ -1,3 +1,4 @@
+"use client";
 import Faq from "@/components/Preparation/Faq";
 import FatHeading from "@/components/Wrapped/FatHeading";
 import WrappedContainer from "@/components/Wrapped/WrappedContainer";

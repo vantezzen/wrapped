@@ -5,6 +5,7 @@ import FatHeading from "../FatHeading";
 import CountUp from "react-countup";
 import HideForTime from "../HideForTime";
 import lookup from "@/lib/utils/lookup";
+import SlideContainer from "../SlideContainer";
 
 const gbPerYear = {
   0: 1960,
@@ -59,22 +60,24 @@ function TotalStorage({ statistics }: WrappedSlideProps) {
   const formattedBytes = formatBytes(totalBytes);
 
   return (
-    <WrappedContainer bg="bg-zinc-900" text="text-starship-400">
-      <InfoText className="!text-zinc-200">
-        While scrolling, TikTok downloaded around
-      </InfoText>
+    <WrappedContainer>
+      <SlideContainer>
+        <InfoText>While scrolling, TikTok downloaded around</InfoText>
 
-      <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000">
-        <CountUp end={formattedBytes.value} duration={2} />{" "}
-        {formattedBytes.unit}
-      </FatHeading>
+        <FatHeading className="animate-in slide-in-from-bottom fade-in duration-1000">
+          <CountUp end={formattedBytes.value} duration={2} />{" "}
+          {formattedBytes.unit}
+        </FatHeading>
 
-      <HideForTime time={500}>
-        <InfoText className="!text-zinc-200 animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
-          That's about the total data storage worldwide in{" "}
-          <span className="font-bold">{lookup(totalGigabytes, gbPerYear)}</span>
-        </InfoText>
-      </HideForTime>
+        <HideForTime time={500}>
+          <InfoText className="animate-in slide-in-from-bottom fade-in duration-1000 delay-500">
+            That's about the total data storage worldwide in{" "}
+            <span className="font-bold">
+              {lookup(totalGigabytes, gbPerYear)}
+            </span>
+          </InfoText>
+        </HideForTime>
+      </SlideContainer>
     </WrappedContainer>
   );
 }

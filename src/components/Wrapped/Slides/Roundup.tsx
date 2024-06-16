@@ -26,22 +26,22 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
   const [isLoadingShareImage, setIsLoadingShareImage] = React.useState(false);
 
   return (
-    <WrappedContainer bg="bg-zinc-900" text="text-starship-400">
-      <div className="md:p-12">
-        <h1 className="text-2xl font-black text-starship-400 animate-in slide-in-from-bottom fade-in duration-1000 pb-12">
+    <WrappedContainer>
+      <div className="p-12">
+        <h1 className="text-2xl font-black animate-in slide-in-from-bottom fade-in duration-1000 pb-12">
           And you did so much more...
         </h1>
 
-        <div className="w-4xl dark text-zinc-200 text-left">
+        <div className="w-4xl text-zinc-900 text-left font-bold">
           <Table className="w-full">
             <TableBody>
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Watch Sessions</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Watch Sessions</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Total videos watched
                 </TableCell>
                 <TableCell>
@@ -49,7 +49,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Total watch time
                 </TableCell>
                 <TableCell>
@@ -58,13 +58,15 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Watch sessions</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Watch sessions
+                </TableCell>
                 <TableCell>
                   {statistics.watchSessions.totalSessions.toLocaleString()}
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Average session length
                 </TableCell>
                 <TableCell>
@@ -73,7 +75,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Longest watch session
                 </TableCell>
                 <TableCell>
@@ -84,7 +86,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Earliest video watched in data
                 </TableCell>
                 <TableCell>
@@ -94,7 +96,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Last video watched in data
                 </TableCell>
                 <TableCell>
@@ -104,7 +106,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Most active weekday
                 </TableCell>
                 <TableCell>
@@ -113,18 +115,20 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Comments</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Comments</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Total Comments</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Total Comments
+                </TableCell>
                 <TableCell>
                   {statistics.comments.totalComments.toLocaleString()}
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Average Comment Length
                 </TableCell>
                 <TableCell>
@@ -132,7 +136,9 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Most used emoji</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Most used emoji
+                </TableCell>
                 <TableCell>
                   {statistics.comments.mostUsedEmoji.emoji} (x
                   {statistics.comments.mostUsedEmoji.count.toLocaleString()})
@@ -140,18 +146,20 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Likes</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Likes</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Total likes</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Total likes
+                </TableCell>
                 <TableCell>
                   {statistics.likes.totalLikes.toLocaleString()}
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Day with most liked posts
                 </TableCell>
                 <TableCell>
@@ -164,7 +172,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   First liked video
                 </TableCell>
                 <TableCell>
@@ -182,18 +190,20 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Shares</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Shares</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Total shares</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Total shares
+                </TableCell>
                 <TableCell>
                   {statistics.shares.totalShares.toLocaleString()}
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Day with most shared posts
                 </TableCell>
                 <TableCell>
@@ -206,7 +216,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   First shared video
                 </TableCell>
                 <TableCell>
@@ -224,12 +234,12 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Live</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Live</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Total Lives viewed
                 </TableCell>
                 <TableCell>
@@ -237,7 +247,7 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">
+                <TableCell className="text-zinc-800 font-medium">
                   Total comments on lives
                 </TableCell>
                 <TableCell>
@@ -246,16 +256,20 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-zinc-400">
-                  <strong className="text-starship-400">Persona</strong>
+                <TableCell className="text-zinc-800 font-medium">
+                  <strong className="">Persona</strong>
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Your persona</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Your persona
+                </TableCell>
                 <TableCell>{persona.name}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell className="text-zinc-400">Description</TableCell>
+                <TableCell className="text-zinc-800 font-medium">
+                  Description
+                </TableCell>
                 <TableCell>{persona.description}</TableCell>
               </TableRow>
             </TableBody>

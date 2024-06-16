@@ -5,7 +5,7 @@ function Projects() {
   return (
     <div className="text-left max-w-3xl mx-auto mt-12">
       <p className="font-bold text-lg">Check out my other projects:</p>
-      <div className="grid grid-cols-2 md:grid-cols-4 mt-6 gap-8">
+      <div className="grid grid-cols-2 mt-6 gap-8">
         <ProjectCard
           title="SparkTunes"
           description="A 'Top Trumps'-style game that lets you play with your Spotify music"
@@ -30,7 +30,7 @@ function Projects() {
           image="/projects/doordash.png"
           link="https://doordash.vantezzen.io/"
         />
-        <ProjectCard
+        {/* <ProjectCard
           title="Wrapped for Apple Health"
           description="How many naps did you take last year? Find out with Wrapped for Apple Health"
           image="/projects/health.png"
@@ -41,7 +41,7 @@ function Projects() {
           description="Feline Groovy? Let AI create a Spotify playlist for your pet"
           image="/projects/purrsona.png"
           link="https://purrsona.vantezzen.io"
-        />
+        /> */}
         <ProjectCard
           title="WonderRail"
           description="Easily plan your Interrail/Eurail trip across Europe"

@@ -1,4 +1,5 @@
 import React from "react";
+import Serif from "../Serif";
 
 function FatHeading({
   children,
@@ -12,9 +13,9 @@ function FatHeading({
   const Component = component;
   return (
     <Component
-      className={`font-black text-6xl ${className} max-w-full hyphens-auto`}
+      className={`font-black text-5xl ${className} max-w-full hyphens-auto`}
     >
-      {children}
+      <Serif>{children}</Serif>
     </Component>
   );
 }

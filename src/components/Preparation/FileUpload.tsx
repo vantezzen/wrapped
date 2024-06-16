@@ -1,63 +1,60 @@
 "use client";
 import React from "react";
-import FatHeading from "../Wrapped/FatHeading";
 import { Button } from "../ui/button";
 import { File } from "lucide-react";
-import MutedText from "../Wrapped/MutedText";
+import WrappedContainer from "../Wrapped/WrappedContainer";
+import Serif from "../Serif";
+import InfoText from "../Wrapped/InfoText";
 
 function FileUpload({ onFileSelect }: { onFileSelect: (file: File) => void }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   return (
-    <div className="w-screen min-h-screen flex justify-center items-center flex-col gap-6 text-center bg-zinc-900 text-starship-400 dark p-6">
-      <FatHeading className="text-3xl">
-        Select your TikTok
-        <br />
-        data to get started
-      </FatHeading>
+    <WrappedContainer>
+      <div className="p-12 rounded-xl bg-brand-dark overflow-hidden max-w-xl mx-auto">
+        <Serif>
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Select your TikTok data to get started
+          </h1>
+        </Serif>
 
-      <MutedText className="!text-zinc-200 text-base">
-        Wrapped for TikTok needs your TikTok data to generate your statistics.
-        <br />
-        <br />
-        Your data will not be uploaded to any server, all statistics are
-        generated locally in your browser.
-        <br />
-        Wrapped for TikTok is{" "}
-        <a
-          href="https://github.com/vantezzen/wrapped"
-          className="underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          open-source
-        </a>{" "}
-        if you want to verify this.
-      </MutedText>
-      <label htmlFor="file-upload">
-        <Button
-          onClick={() => {
-            inputRef.current?.click();
+        <InfoText className="mt-6">
+          Wrapped for TikTok needs your TikTok data to generate your statistics.
+        </InfoText>
+        <InfoText className="mt-3">
+          Your data will not be uploaded to any server, all statistics are
+          generated locally in your browser.
+        </InfoText>
+        <InfoText className="mt-3">
+          Your exported data does not include login credentials! For more info
+          on how to verify this, look at the FAQ section on the home page.
+        </InfoText>
+
+        <label htmlFor="file-upload">
+          <Button
+            onClick={() => {
+              inputRef.current?.click();
+            }}
+            className="mt-6 w-full"
+          >
+            <File size={16} className="mr-2" />
+            Select file
+          </Button>
+        </label>
+        <input
+          type="file"
+          accept=".zip,.json"
+          id="file-upload"
+          className="hidden"
+          ref={inputRef}
+          onChange={(e) => {
+            if (e.target.files) {
+              onFileSelect(e.target.files[0]);
+            }
           }}
-        >
-          <File size={16} className="mr-2" />
-          Select file
-        </Button>
-      </label>
-
-      <input
-        type="file"
-        accept=".zip,.json"
-        id="file-upload"
-        className="hidden"
-        ref={inputRef}
-        onChange={(e) => {
-          if (e.target.files) {
-            onFileSelect(e.target.files[0]);
-          }
-        }}
-      />
-    </div>
+        />
+      </div>
+    </WrappedContainer>
   );
 }
 

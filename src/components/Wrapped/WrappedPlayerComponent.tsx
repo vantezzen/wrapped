@@ -27,6 +27,17 @@ function WrappedPlayerComponent({
     player.on("update", forceUpdate);
     player.play(props.statistics);
 
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        player.autoAdvance = false;
+        player.nextSlide();
+      }
+      if (e.key === "ArrowLeft") {
+        player.autoAdvance = false;
+        player.previousSlide();
+      }
+    });
+
     return () => {
       player.off("update", forceUpdate);
     };
@@ -40,16 +51,18 @@ function WrappedPlayerComponent({
 
   return (
     <>
-      <TransitionGroup>
-        <CSSTransition
-          key={player.currentSlide?.name || "none"}
-          timeout={300}
-          classNames="fade"
-          unmountOnExit
-        >
-          <Component {...props} />
-        </CSSTransition>
-      </TransitionGroup>
+      <div className="text-center">
+        <TransitionGroup>
+          <CSSTransition
+            key={player.currentSlide?.name || "none"}
+            timeout={300}
+            classNames="fade"
+            unmountOnExit
+          >
+            <Component {...props} />
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
     </>
   );
 }
