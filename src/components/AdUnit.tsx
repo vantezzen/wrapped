@@ -19,14 +19,26 @@ function AdUnit({
   }, []);
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block" }}
-      data-ad-client={adClient}
-      data-ad-slot={adSlot}
-      data-ad-format={adFormat}
-      data-full-width-responsive="true"
-    ></ins>
+    <div
+      className="adparent"
+      style={{
+        minWidth: "320px",
+        margin: "auto",
+        textAlign: "center",
+        width: "100%",
+      }}
+    >
+      <ins
+        className="adsbygoogle"
+        style={{
+          display: "block",
+        }}
+        data-ad-client={adClient}
+        data-ad-slot={adSlot}
+        data-ad-format={adFormat}
+        data-full-width-responsive="true"
+      ></ins>
+    </div>
   );
 }
 
