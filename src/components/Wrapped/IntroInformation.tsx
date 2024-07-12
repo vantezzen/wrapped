@@ -13,6 +13,7 @@ import Serif from "../Serif";
 import { Badge } from "../ui/badge";
 import AnimatedGradientText from "../ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
+import AdUnit from "../AdUnit";
 
 function IntroInformation({
   onContinue,
@@ -87,6 +88,8 @@ function IntroInformation({
               />
             </div>
           </div>
+
+          <AdUnit adSlot="7452322179" />
 
           <div className="p-12 rounded-xl bg-brand-dark w-full">
             <Serif>
@@ -163,6 +166,8 @@ function IntroInformation({
               deliver accurate, reliable, and actionable statistics.
             </p>
           </div>
+
+          <AdUnit adSlot="7452322179" />
 
           <Footer />
         </WrappedContainer>

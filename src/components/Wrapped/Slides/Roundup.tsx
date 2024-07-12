@@ -9,6 +9,7 @@ import { Loader2, Share2 } from "lucide-react";
 import shareImage from "@/lib/utils/shareImage";
 import { trackEvent } from "@/lib/analytics";
 import Projects from "@/components/Projects";
+import AdUnit from "@/components/AdUnit";
 
 function Roundup({ statistics, persona }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
@@ -31,6 +32,8 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
         <h1 className="text-2xl font-black animate-in slide-in-from-bottom fade-in duration-1000 pb-12">
           And you did so much more...
         </h1>
+
+        <AdUnit adSlot="7452322179" />
 
         <div className="w-4xl text-zinc-900 text-left font-bold">
           <Table className="w-full">
@@ -275,6 +278,8 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
             </TableBody>
           </Table>
 
+          <AdUnit adSlot="7452322179" />
+
           <Button
             onClick={async () => {
               setIsLoadingShareImage(true);
@@ -301,6 +306,8 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
           </Button>
 
           <Projects />
+
+          <AdUnit adSlot="7452322179" />
         </div>
       </div>
     </WrappedContainer>
