@@ -10,25 +10,25 @@ function Projects() {
           title="Wrapped for Hinge"
           description="How many times did I ask for someones Instagram? Find out with Wrapped for Hinge"
           image="/projects/hinge.png"
-          link="https://hinge.vantezzen.io/"
+          link="https://hinge.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         <ProjectCard
           title="SparkTunes"
           description="A 'Top Trumps'-style game that lets you play with your Spotify music"
           image="/projects/sparktunes.png"
-          link="https://sparktunes.vantezzen.io"
+          link="https://sparktunes.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         <ProjectCard
           title="Roast Me, Robert"
           description="Let Robert roast your selfies with AI"
           image="/projects/robert.webp"
-          link="https://roast.vantezzen.io"
+          link="https://roast.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         <ProjectCard
           title="Wrapped for Instagram"
           description="How many stories did you post last year? Find out with Wrapped for Instagram"
           image="/projects/instagram.png"
-          link="https://ig.vantezzen.io/"
+          link="https://ig.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         {/* <ProjectCard
           title="Wrapped for Doordash"
@@ -52,7 +52,7 @@ function Projects() {
           title="WonderRail"
           description="Easily plan your Interrail/Eurail trip across Europe"
           image="/projects/wonderrail.png"
-          link="https://wonderrail.com"
+          link="https://wonderrail.com/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         {/* <ProjectCard
           title="Melody Mayhem"
