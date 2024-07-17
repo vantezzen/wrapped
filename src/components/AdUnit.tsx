@@ -11,7 +11,11 @@ function AdUnit({
 }) {
   useEffect(() => {
     const notify = () => {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error("AdUnit error", e);
+      }
     };
 
     notify();

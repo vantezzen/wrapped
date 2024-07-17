@@ -10,6 +10,7 @@ import shareImage from "@/lib/utils/shareImage";
 import { trackEvent } from "@/lib/analytics";
 import Projects from "@/components/Projects";
 import AdUnit from "@/components/AdUnit";
+import Image from "next/image";
 
 function Roundup({ statistics, persona }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
@@ -277,6 +278,22 @@ function Roundup({ statistics, persona }: WrappedSlideProps) {
               </TableRow>
             </TableBody>
           </Table>
+
+          <hr className="my-12" />
+
+          <h3 className="text-xl font-bold">Liked your Wrapped?</h3>
+          <a
+            href="https://buymeacoffee.com/vantezzen"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/bmc.png"
+              alt="Buy me a coffee"
+              width={200}
+              height={50}
+            />
+          </a>
 
           <AdUnit adSlot="7452322179" />
 
