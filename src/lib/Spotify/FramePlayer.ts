@@ -98,8 +98,8 @@ export default class SpotifyFramePlayer extends EventEmitter {
           };
         });
 
+      this.destroyPreviousIFrame();
       if (!oembed.html) {
-        this.destroyPreviousIFrame();
         resolve();
         return;
       }
@@ -115,7 +115,6 @@ export default class SpotifyFramePlayer extends EventEmitter {
       this.embedController.loadUri(uri);
       this.embedController.resume();
 
-      setTimeout(() => this.destroyPreviousIFrame(), 1000);
       await this.waitForSpotify();
 
       this.currentIFrame!.style.opacity = "1";
