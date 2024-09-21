@@ -1,11 +1,12 @@
 import Persona from "@/lib/Statistics/Personas/Persona";
-import { Statistics } from "@/lib/Wrapped";
+import Wrapped, { Statistics } from "@/lib/Wrapped";
 import React from "react";
 import { motion } from "framer-motion";
 
 export type WrappedSlideProps = {
   statistics: Statistics;
   persona: Persona;
+  wrapped: Wrapped;
   isDemo: boolean;
 };
 

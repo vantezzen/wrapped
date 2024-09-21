@@ -372,6 +372,7 @@ function TikTokWrappedAppPage() {
           statistics={wrapped!.getStatistics()}
           persona={wrapped!.getPersona()}
           spotify={spotify}
+          wrapped={wrapped!}
           isDemo={wrapped!.demoMode}
         />
       )}

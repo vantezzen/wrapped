@@ -11,10 +11,12 @@
     "dummy-data": "ts-node ./data/generate.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.654.0",
     "@faker-js/faker": "^8.0.2",
     "@next/third-parties": "^14.2.3",
     "@radix-ui/react-accordion": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.0.1",
     "@sentry/nextjs": "^7.53.0",
     "@tailwindcss/typography": "^0.5.9",
