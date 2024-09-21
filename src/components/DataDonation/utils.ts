@@ -29,6 +29,9 @@ function anonymizeUserData(userData: TikTokUserData) {
       },
     },
     Video: null,
+
+    // All shopping values could be personal so we remove everything
+    "Tiktok Shopping": null,
   };
 }
 

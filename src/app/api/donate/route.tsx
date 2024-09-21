@@ -16,11 +16,20 @@ export async function POST(request: Request) {
 
   const randomId = Math.random().toString(36).substring(7);
 
+  const data = {
+    ...body,
+    id: randomId,
+    user: {
+      country: request.headers.get("X-Vercel-IP-Country"),
+      region: request.headers.get("X-Vercel-IP-Country-Region"),
+    },
+  };
+
   await s3.send(
     new PutObjectCommand({
       Bucket: process.env.S3_BUCKET!,
       Key: `${Date.now()}_${randomId}.json`,
-      Body: JSON.stringify(body),
+      Body: JSON.stringify(data),
     })
   );
 
