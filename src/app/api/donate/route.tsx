@@ -22,6 +22,7 @@ export async function POST(request: Request) {
     user: {
       country: request.headers.get("X-Vercel-IP-Country"),
       region: request.headers.get("X-Vercel-IP-Country-Region"),
+      uploadTime: new Date().toISOString(),
     },
   };
 
