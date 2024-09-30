@@ -55,6 +55,7 @@ export default class WrappedCreator {
                 fileType: file.type,
               },
             });
+            console.error("Cannot read as JSON", e);
             if (!isRetry) {
               this.fromZip(file, true).then(resolve).catch(reject);
             } else {
@@ -88,7 +89,8 @@ export default class WrappedCreator {
           fileType: file.type,
         },
       });
-
+      console.error("Cannot read as ZIP", e);
+      
       if (!isRetry) {
         return await this.fromJSON(file, true);
       } else {
