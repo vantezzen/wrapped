@@ -42,7 +42,7 @@ export default class WrappedCreator {
           }
 
           try {
-            const content = JSON.parse(e.target.result as string);
+            const content = this.parseJson(e.target.result as string);
             const userData = content as TikTokUserData;
             this.investigateSchema(userData);
             resolve(new Wrapped(userData));
@@ -76,7 +76,7 @@ export default class WrappedCreator {
       await zip.loadAsync(file);
       const jsonFile = Object.values(zip.files)[0];
       const jsonContent = await jsonFile.async("string");
-      const content = JSON.parse(jsonContent as string);
+      const content = this.parseJson(jsonContent as string);
       const userData = content as TikTokUserData;
       this.investigateSchema(userData);
       return new Wrapped(userData);
@@ -90,7 +90,7 @@ export default class WrappedCreator {
         },
       });
       console.error("Cannot read as ZIP", e);
-      
+
       if (!isRetry) {
         return await this.fromJSON(file, true);
       } else {
@@ -114,6 +114,21 @@ export default class WrappedCreator {
           errors: parsed.error,
         },
       });
+    }
+  }
+
+  private parseJson(content: string): TikTokUserData {
+    try {
+      return JSON.parse(content);
+    } catch (e) {
+      // Sometimes TikTok seems to duplicate the content of the JSON - which makes it invalid
+      // In that case, we try to only use the first half of the contents
+      if (/}(( |\n)*)+{/.test(content)) {
+        const half = content.substring(0, content.length / 2);
+        return JSON.parse(half);
+      }
+
+      throw e;
     }
   }
 }
