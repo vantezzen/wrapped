@@ -7,10 +7,10 @@ function Projects() {
       <p className="font-bold text-lg">Check out my other projects:</p>
       <div className="grid grid-cols-2 mt-6 gap-8">
         <ProjectCard
-          title="Wrapped for Hinge"
-          description="How many times did I ask for someones Instagram? Find out with Wrapped for Hinge"
-          image="/projects/hinge.png"
-          link="https://hinge.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
+          title="PatchNotes"
+          description="A fun multi-player game - Craft the Craziest Phrases from Scattered Words!"
+          image="/projects/patchnotes.png"
+          link="https://patchnotes.vantezzen.io/?utm_source=tiktok-wrapped&utm_medium=website&utm_campaign=projects"
         />
         <ProjectCard
           title="SparkTunes"
