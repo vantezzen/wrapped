@@ -11,7 +11,7 @@ import { trackEvent } from "@/lib/analytics";
 import Projects from "@/components/Projects";
 import AdUnit from "@/components/AdUnit";
 import Image from "next/image";
-import DonateModal from "@/components/DataDonation/DonateModal";
+// import DonateModal from "@/components/DataDonation/DonateModal";
 
 function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
   const { amount: totalWatchTimeAmount, unit: totalWatchTimeUnit } =
@@ -35,7 +35,7 @@ function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
           And you did so much more...
         </h1>
 
-        <DonateModal Wrapped={wrapped} />
+      
         <AdUnit adSlot="7452322179" />
 
         <div className="w-4xl text-zinc-900 text-left font-bold">
