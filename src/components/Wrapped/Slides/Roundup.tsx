@@ -11,6 +11,7 @@ import { trackEvent } from "@/lib/analytics";
 import Projects from "@/components/Projects";
 import AdUnit from "@/components/AdUnit";
 import Image from "next/image";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 // import DonateModal from "@/components/DataDonation/DonateModal";
 
 function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
@@ -35,7 +36,31 @@ function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
           And you did so much more...
         </h1>
 
-      
+        <Alert className="text-left max-w-lg mx-auto mb-6">
+          <AlertTitle>Did you like your Wrapped?</AlertTitle>
+
+          <AlertDescription>
+            Wrapped for TikTok is privacy-centered and will always be free - to
+            help me keep it that way, consider supporting me on Buy Me a Coffee!
+          </AlertDescription>
+
+          <div className="flex justify-center mt-3">
+            <a
+              href="https://buymeacoffee.com/vantezzen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <Image
+                src="/bmc.png"
+                alt="Buy me a coffee"
+                width={150}
+                height={50}
+              />
+            </a>
+          </div>
+        </Alert>
+
         <AdUnit adSlot="7452322179" />
 
         <div className="w-4xl text-zinc-900 text-left font-bold">
