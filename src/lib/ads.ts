@@ -13,3 +13,17 @@ export function useLoadAds() {
     loadAds();
   }, []);
 }
+
+export function loadFullAd() {
+  const script = document.createElement("script");
+  script.src = "https://groleegni.net/401/8645646";
+  try {
+    (document.body || document.documentElement).appendChild(script);
+  } catch (e) {}
+}
+
+export function useLoadFullAd() {
+  useEffect(() => {
+    loadFullAd();
+  }, []);
+}

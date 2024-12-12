@@ -12,6 +12,7 @@ import Projects from "@/components/Projects";
 import AdUnit from "@/components/AdUnit";
 import Image from "next/image";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useLoadFullAd } from "@/lib/ads";
 // import DonateModal from "@/components/DataDonation/DonateModal";
 
 function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
@@ -20,6 +21,8 @@ function Roundup({ statistics, persona, wrapped }: WrappedSlideProps) {
   const totalWatchTimeMins = Math.round(
     statistics.watchSessions.totalWatchTimeSec / 60
   );
+
+  useLoadFullAd();
 
   const { amount: averageSessionLengthAmount, unit: averageSessionLengthUnit } =
     formatTimeLength(statistics.watchSessions.averageSessionLengthSec);
