@@ -22,13 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.png" />
-
-        {/* OnClick Ads */}
-        <script
-          dangerouslySetInnerHTML={{
-              __html: `(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://shebudriftaiter.net/tag.min.js',8645628,document.body||document.documentElement)`,
-          }}
-        />
       </head>
 
       <body className={`${inter.className} w-screen min-h-screen`}>

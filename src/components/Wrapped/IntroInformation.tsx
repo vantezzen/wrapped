@@ -14,6 +14,7 @@ import { Badge } from "../ui/badge";
 import AnimatedGradientText from "../ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import AdUnit from "../AdUnit";
+import { loadAds } from "@/lib/ads";
 
 function IntroInformation({
   onContinue,
@@ -54,7 +55,13 @@ function IntroInformation({
             </InfoText>
 
             <div className="grid grid-cols-7 gap-3">
-              <Button onClick={onContinue} className="col-span-4">
+              <Button
+                onClick={() => {
+                  onContinue();
+                  loadAds();
+                }}
+                className="col-span-4"
+              >
                 <Serif>
                   <div className="flex gap-2 justify-center items-center">
                     Start now <ArrowRight size={16} />
@@ -62,7 +69,10 @@ function IntroInformation({
                 </Serif>
               </Button>
               <Button
-                onClick={onDemo}
+                onClick={() => {
+                  onDemo();
+                  loadAds();
+                }}
                 variant="secondary"
                 className="bg-white col-span-3"
               >
