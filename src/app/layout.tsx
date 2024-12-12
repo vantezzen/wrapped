@@ -23,12 +23,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" />
 
-        {/* Vignette Banner */}
-        <script
-          dangerouslySetInnerHTML={{
-              __html: `(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',8645646,document.createElement('script'))`,
-          }}
-        />
         {/* OnClick Ads */}
         <script
           dangerouslySetInnerHTML={{
