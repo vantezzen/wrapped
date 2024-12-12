@@ -22,6 +22,25 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.png" />
+
+        {/* In-page push notifications */}
+        <script
+          dangerouslySetInnerHTML={{
+              __html: `(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',8645619,document.createElement('script'))`,
+          }}
+        />
+        {/* Vignette Banner */}
+        <script
+          dangerouslySetInnerHTML={{
+              __html: `(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('cimtaiphos.com',8645588,document.createElement('script'))`,
+          }}
+        />
+        {/* OnClick Ads */}
+        <script
+          dangerouslySetInnerHTML={{
+              __html: `(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://shebudriftaiter.net/tag.min.js',8645628,document.body||document.documentElement)`,
+          }}
+        />
       </head>
 
       <body className={`${inter.className} w-screen min-h-screen`}>
