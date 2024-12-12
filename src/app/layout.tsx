@@ -23,16 +23,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" />
 
-        {/* In-page push notifications */}
-        <script
-          dangerouslySetInnerHTML={{
-              __html: `(function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('vemtoutcheeg.com',8645619,document.createElement('script'))`,
-          }}
-        />
         {/* Vignette Banner */}
         <script
           dangerouslySetInnerHTML={{
-              __html: `(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('cimtaiphos.com',8645588,document.createElement('script'))`,
+              __html: `(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('groleegni.net',8645646,document.createElement('script'))`,
           }}
         />
         {/* OnClick Ads */}
