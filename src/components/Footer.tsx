@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import MutedText from "./Wrapped/MutedText";
+import Image from "next/image";
+import simpleAnalyticsLogo from "./simpleanalytics.svg";
 
 function Footer() {
   return (
@@ -29,6 +31,16 @@ function Footer() {
         </Link>
       </div>
       <div className="text-center mb-6 text-xs">
+        <a href="https://simpleanalytics.com" target="_blank" rel="noreferrer">
+          <Image
+            src={simpleAnalyticsLogo}
+            width={130}
+            height={30}
+            alt="SimpleAnalytics Logo"
+            className="mx-auto my-3"
+          />
+        </a>
+
         <MutedText>
           TikTok is a registered trademark of Bytedance Ltd. This website is not
           affiliated with or endorsed by TikTok or Bytedance Ltd.
