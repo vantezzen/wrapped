@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/nextjs";
+import seedrandom from "seedrandom";
 import SpotifyFramePlayer from "./Spotify/FramePlayer";
 import CommentsStatistic, {
   CommentsStatisticResult,
@@ -6,6 +8,9 @@ import LikesStatistic, {
   LikesStatisticResult,
 } from "./Statistics/LikesStatistic";
 import LiveStatistic, { LiveStatisticResult } from "./Statistics/LiveStatistic";
+import defaultPersonas, {
+  TikTokEnjoyer,
+} from "./Statistics/Personas/defaultPersonas";
 import Persona from "./Statistics/Personas/Persona";
 import SharesStatistic, {
   SharesStatisticResult,
@@ -16,11 +21,6 @@ import WatchSessionsStatistic, {
   WatchSessionsStatisticResult,
 } from "./Statistics/WatchSessionsStatistic";
 import { TikTokUserData } from "./types";
-import defaultPersonas, {
-  TikTokEnjoyer,
-} from "./Statistics/Personas/defaultPersonas";
-import seedrandom from "seedrandom";
-import * as Sentry from "@sentry/nextjs";
 
 export type Statistics = {
   name: string;
@@ -94,9 +94,9 @@ export default class Wrapped {
 
   constructor(public userData: TikTokUserData) {
     if (
-      userData.Activity &&
-      (!userData.Activity["Video Browsing History"].VideoList ||
-        userData.Activity["Video Browsing History"].VideoList?.length === 0)
+      userData["Your Activity"] &&
+      (!userData["Your Activity"]["Watch History"].VideoList ||
+        userData["Your Activity"]["Watch History"].VideoList?.length === 0)
     ) {
       this.possiblyEmptyExport = true;
     }
@@ -110,7 +110,7 @@ export default class Wrapped {
     }
 
     return {
-      name: this.userData.Profile["Profile Information"].ProfileMap.userName,
+      name: this.userData.Profile["Profile Info"].ProfileMap.userName,
       videoAmountWatched: this.calculateStatistic(VideoAmountWatchedStatistic),
       watchSessions: this.calculateStatistic(WatchSessionsStatistic),
       comments: this.calculateStatistic(CommentsStatistic),

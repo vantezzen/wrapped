@@ -99,13 +99,13 @@ const activity: TikTokActivityData = {
       "Web ID": faker.lorem.word(),
     })),
   },
-  "Video Browsing History": {
+  "Watch History": {
     VideoList: generateFavoriteElements(),
   },
 };
 
 const data: TikTokUserData = {
-  Activity: activity,
+  "Your Activity": activity,
   "App Settings": {
     Block: {
       BlockList: generateUserSchemaList(),
@@ -146,7 +146,7 @@ const data: TikTokUserData = {
   },
 
   Profile: {
-    "Profile Information": {
+    "Profile Info": {
       ProfileMap: {
         likesReceived: String(faker.number.int()),
         profilePhoto: faker.internet.url(),

@@ -22,7 +22,7 @@ export default class SharesStatistic extends Statistic<SharesStatisticResult> {
     };
 
     const sharedPosts =
-      this.wrapped.userData.Activity[
+      this.wrapped.userData["Your Activity"][
         "Share History"
       ].ShareHistoryList?.reverse();
     const totalShares = sharedPosts?.length ?? 0;

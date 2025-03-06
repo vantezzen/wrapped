@@ -17,7 +17,9 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
 
   calculateResult(): LikesStatisticResult {
     const likedPosts =
-      this.wrapped.userData.Activity["Like List"].ItemFavoriteList?.reverse();
+      this.wrapped.userData["Your Activity"][
+        "Like List"
+      ].ItemFavoriteList?.reverse();
     const totalLikes = likedPosts?.length ?? 0;
     if (!likedPosts) {
       return {

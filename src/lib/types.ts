@@ -137,13 +137,13 @@ export const TikTokActivityDataSchema = z.object({
   Status: z.object({
     "Status List": z.array(TikTokStatusElementSchema).nullable().optional(),
   }),
-  "Video Browsing History": z.object({
+  "Watch History": z.object({
     VideoList: z.array(TikTokFavouriteElementSchema).nullable().optional(),
   }),
 });
 
 export const TikTokUserDataSchema = z.object({
-  Activity: TikTokActivityDataSchema,
+  "Your Activity": TikTokActivityDataSchema,
   "App Settings": z.object({
     Block: z.object({
       BlockList: z.array(TikTokUserSchema).nullable().optional(),
@@ -165,7 +165,7 @@ export const TikTokUserDataSchema = z.object({
     }),
   }),
   Profile: z.object({
-    "Profile Information": z.object({
+    "Profile Info": z.object({
       ProfileMap: z.object({
         likesReceived: z.string(),
         profilePhoto: z.string(),
