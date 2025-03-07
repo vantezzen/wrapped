@@ -5,7 +5,7 @@ function anonymizeUserData(userData: TikTokUserData) {
   return {
     ...userData,
     Activity: {
-      ...userData["Your Activity"],
+      ...(userData["Your Activity"] ?? userData.Activity),
       "Login History": null,
       "Most Recent Location Data": null,
       "Search History": null,

@@ -1,8 +1,17 @@
 import { z } from "zod";
 
+// @deprecated Old schema
+export const TikTokOldFavouriteElementSchema = z.object({
+  Date: z.string(),
+  Link: z.string(),
+});
 export const TikTokFavouriteElementSchema = z.object({
   date: z.string(),
   link: z.string().optional().nullable(),
+
+  // @deprecated Old schema
+  Date: z.string(),
+  Link: z.string(),
 });
 
 export const TikTokWatchHistoryElementSchema = z.object({
@@ -54,6 +63,10 @@ export const TikTokStatusElementSchema = z.object({
 export const TikTokCommentElementSchema = z.object({
   date: z.string(),
   comment: z.string(),
+
+  // @deprecated Old schema
+  Date: z.string(),
+  Comment: z.string(),
 });
 
 export const TikTokLiveCommentElementSchema = z.object({
@@ -145,9 +158,16 @@ export const TikTokActivityDataSchema = z.object({
   "Watch History": z.object({
     VideoList: z.array(TikTokWatchHistoryElementSchema).nullable().optional(),
   }),
+
+  // @deprecated Old schema
+  "Video Browsing History": z.object({
+    VideoList: z.array(TikTokOldFavouriteElementSchema).nullable().optional(),
+  }),
 });
 
 export const TikTokUserDataSchema = z.object({
+  // @deprecated Old schema
+  Activity: TikTokActivityDataSchema,
   "Your Activity": TikTokActivityDataSchema,
   "App Settings": z.object({
     Block: z.object({
@@ -171,6 +191,15 @@ export const TikTokUserDataSchema = z.object({
   }),
   Profile: z.object({
     "Profile Info": z.object({
+      ProfileMap: z.object({
+        likesReceived: z.string(),
+        profilePhoto: z.string(),
+        userName: z.string(),
+      }),
+    }),
+
+    // @deprecated Old schema
+    "Profile Information": z.object({
       ProfileMap: z.object({
         likesReceived: z.string(),
         profilePhoto: z.string(),

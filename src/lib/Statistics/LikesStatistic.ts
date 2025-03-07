@@ -16,10 +16,10 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
   name = "LikesStatistic";
 
   calculateResult(): LikesStatisticResult {
-    const likedPosts =
-      this.wrapped.userData["Your Activity"][
-        "Like List"
-      ].ItemFavoriteList?.reverse();
+    const userActivity =
+      this.wrapped.userData["Your Activity"] ?? this.wrapped.userData.Activity;
+
+    const likedPosts = userActivity["Like List"].ItemFavoriteList?.reverse();
     const totalLikes = likedPosts?.length ?? 0;
     if (!likedPosts) {
       return {
@@ -39,7 +39,7 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
     for (let i = 0; i < likedPosts.length; i++) {
       const post = likedPosts[i];
 
-      const date = new Date(post.date);
+      const date = new Date(post.date ?? post.Date);
       const day = date.toDateString();
       if (likedPerDay.has(day)) {
         likedPerDay.set(day, likedPerDay.get(day)! + 1);
@@ -54,8 +54,8 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
       totalLikes: totalLikes,
       dayWithMostLikedPosts: mostLikedDay,
       firstLikedVideo: {
-        date: likedPosts[0].date,
-        link: likedPosts[0].link ?? "",
+        date: likedPosts[0].date ?? likedPosts[0].Date,
+        link: likedPosts[0].link ?? likedPosts[0].Link ?? "",
       },
     };
   }

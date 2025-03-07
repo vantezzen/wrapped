@@ -93,10 +93,13 @@ export default class Wrapped {
   public possiblyEmptyExport = false;
 
   constructor(public userData: TikTokUserData) {
+    const userActivity = userData["Your Activity"] ?? userData.Activity;
+    const watchHistory =
+      userActivity["Watch History"] ?? userActivity["Video Browsing History"];
     if (
-      userData["Your Activity"] &&
-      (!userData["Your Activity"]["Watch History"].VideoList ||
-        userData["Your Activity"]["Watch History"].VideoList?.length === 0)
+      userActivity &&
+      watchHistory &&
+      (!watchHistory.VideoList || watchHistory.VideoList?.length === 0)
     ) {
       this.possiblyEmptyExport = true;
     }
@@ -109,8 +112,12 @@ export default class Wrapped {
       return SAMPLE_STATISTICS;
     }
 
+    const profileInfo =
+      this.userData.Profile["Profile Info"] ??
+      this.userData.Profile["Profile Information"];
+
     return {
-      name: this.userData.Profile["Profile Info"].ProfileMap.userName,
+      name: profileInfo.ProfileMap.userName,
       videoAmountWatched: this.calculateStatistic(VideoAmountWatchedStatistic),
       watchSessions: this.calculateStatistic(WatchSessionsStatistic),
       comments: this.calculateStatistic(CommentsStatistic),
