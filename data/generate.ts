@@ -11,6 +11,9 @@ function generateFavoriteElements() {
     elements.push({
       date: faker.date.past().toISOString(),
       link: faker.internet.url(),
+
+      Date: faker.date.past().toISOString(),
+      Link: faker.internet.url(),
     });
   }
   return elements;
@@ -38,6 +41,7 @@ function generateUserSchemaList() {
   return elements;
 }
 
+// @ts-ignore
 const activity: TikTokActivityData = {
   "Favorite Effects": {
     FavoriteEffectsList: generateFavoriteElements(),
@@ -115,6 +119,7 @@ const activity: TikTokActivityData = {
   },
 };
 
+// @ts-ignore
 const data: TikTokUserData = {
   "Your Activity": activity,
   "App Settings": {
@@ -127,6 +132,9 @@ const data: TikTokUserData = {
       CommentsList: Array.from({ length: size }, () => ({
         date: faker.date.past().toISOString(),
         comment: faker.lorem.word(),
+
+        Date: faker.date.past().toISOString(),
+        Comment: faker.lorem.word(),
       })),
     },
   },
@@ -158,6 +166,13 @@ const data: TikTokUserData = {
 
   Profile: {
     "Profile Info": {
+      ProfileMap: {
+        likesReceived: String(faker.number.int()),
+        profilePhoto: faker.internet.url(),
+        userName: faker.internet.userName(),
+      },
+    },
+    "Profile Information": {
       ProfileMap: {
         likesReceived: String(faker.number.int()),
         profilePhoto: faker.internet.url(),
