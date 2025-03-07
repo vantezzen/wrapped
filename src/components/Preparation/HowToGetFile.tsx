@@ -1,9 +1,8 @@
-import React from "react";
-import WrappedContainer from "../Wrapped/WrappedContainer";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import Serif from "../Serif";
 import InfoText from "../Wrapped/InfoText";
+import WrappedContainer from "../Wrapped/WrappedContainer";
 import { Button } from "../ui/button";
-import { ChevronRight, ExternalLink } from "lucide-react";
 
 function HowToGetFile({ onContinue }: { onContinue: () => void }) {
   return (

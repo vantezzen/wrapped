@@ -5,7 +5,7 @@ function anonymizeUserData(userData: TikTokUserData) {
   return {
     ...userData,
     Activity: {
-      ...userData.Activity,
+      ...userData["Your Activity"],
       "Login History": null,
       "Most Recent Location Data": null,
       "Search History": null,
@@ -16,9 +16,9 @@ function anonymizeUserData(userData: TikTokUserData) {
     },
     "Direct Messages": null,
     Profile: {
-      "Profile Information": {
+      "Profile Info": {
         ProfileMap: {
-          ...userData.Profile["Profile Information"].ProfileMap,
+          ...userData.Profile["Profile Info"].ProfileMap,
           PlatformInfo: null,
           userName: "Anonymous",
           telephoneNumber: null,

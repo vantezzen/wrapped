@@ -9,6 +9,17 @@ function generateFavoriteElements() {
   const elements = [];
   for (let i = 0; i < size; i++) {
     elements.push({
+      date: faker.date.past().toISOString(),
+      link: faker.internet.url(),
+    });
+  }
+  return elements;
+}
+
+function generateWatchHistoryElements() {
+  const elements = [];
+  for (let i = 0; i < size; i++) {
+    elements.push({
       Date: faker.date.past().toISOString(),
       Link: faker.internet.url(),
     });
@@ -99,13 +110,13 @@ const activity: TikTokActivityData = {
       "Web ID": faker.lorem.word(),
     })),
   },
-  "Video Browsing History": {
-    VideoList: generateFavoriteElements(),
+  "Watch History": {
+    VideoList: generateWatchHistoryElements(),
   },
 };
 
 const data: TikTokUserData = {
-  Activity: activity,
+  "Your Activity": activity,
   "App Settings": {
     Block: {
       BlockList: generateUserSchemaList(),
@@ -114,8 +125,8 @@ const data: TikTokUserData = {
   Comment: {
     Comments: {
       CommentsList: Array.from({ length: size }, () => ({
-        Date: faker.date.past().toISOString(),
-        Comment: faker.lorem.word(),
+        date: faker.date.past().toISOString(),
+        comment: faker.lorem.word(),
       })),
     },
   },
@@ -146,7 +157,7 @@ const data: TikTokUserData = {
   },
 
   Profile: {
-    "Profile Information": {
+    "Profile Info": {
       ProfileMap: {
         likesReceived: String(faker.number.int()),
         profilePhoto: faker.internet.url(),

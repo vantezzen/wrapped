@@ -1,6 +1,11 @@
 import { z } from "zod";
 
 export const TikTokFavouriteElementSchema = z.object({
+  date: z.string(),
+  link: z.string().optional().nullable(),
+});
+
+export const TikTokWatchHistoryElementSchema = z.object({
   Date: z.string(),
   Link: z.string().optional().nullable(),
 });
@@ -47,8 +52,8 @@ export const TikTokStatusElementSchema = z.object({
 });
 
 export const TikTokCommentElementSchema = z.object({
-  Date: z.string(),
-  Comment: z.string(),
+  date: z.string(),
+  comment: z.string(),
 });
 
 export const TikTokLiveCommentElementSchema = z.object({
@@ -137,13 +142,13 @@ export const TikTokActivityDataSchema = z.object({
   Status: z.object({
     "Status List": z.array(TikTokStatusElementSchema).nullable().optional(),
   }),
-  "Video Browsing History": z.object({
-    VideoList: z.array(TikTokFavouriteElementSchema).nullable().optional(),
+  "Watch History": z.object({
+    VideoList: z.array(TikTokWatchHistoryElementSchema).nullable().optional(),
   }),
 });
 
 export const TikTokUserDataSchema = z.object({
-  Activity: TikTokActivityDataSchema,
+  "Your Activity": TikTokActivityDataSchema,
   "App Settings": z.object({
     Block: z.object({
       BlockList: z.array(TikTokUserSchema).nullable().optional(),
@@ -165,7 +170,7 @@ export const TikTokUserDataSchema = z.object({
     }),
   }),
   Profile: z.object({
-    "Profile Information": z.object({
+    "Profile Info": z.object({
       ProfileMap: z.object({
         likesReceived: z.string(),
         profilePhoto: z.string(),
@@ -191,6 +196,9 @@ export type TikTokUserData = z.infer<typeof TikTokUserDataSchema>;
 export type TikTokActivityData = z.infer<typeof TikTokActivityDataSchema>;
 export type TikTokFavouritesList = z.infer<
   typeof TikTokFavouriteElementSchema
+>[];
+export type TikTokWatchHistoryList = z.infer<
+  typeof TikTokWatchHistoryElementSchema
 >[];
 export type TikTokFavouriteElement = z.infer<
   typeof TikTokFavouriteElementSchema

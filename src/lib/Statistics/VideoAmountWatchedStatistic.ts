@@ -5,7 +5,7 @@ export default class VideoAmountWatchedStatistic extends Statistic<number> {
 
   calculateResult(): number {
     return (
-      this.wrapped.userData.Activity["Video Browsing History"].VideoList
+      this.wrapped.userData["Your Activity"]["Watch History"].VideoList
         ?.length ?? 0
     );
   }

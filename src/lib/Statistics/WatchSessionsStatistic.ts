@@ -1,5 +1,5 @@
-import Statistic from "./Statistic";
 import * as Sentry from "@sentry/nextjs";
+import Statistic from "./Statistic";
 
 export type WatchSessionsStatisticResult = {
   totalWatchTimeSec: number;
@@ -39,8 +39,8 @@ export default class WatchSessionsStatistic extends Statistic<WatchSessionsStati
     let currentSessionStartTime = null;
     let sessionLengths = [];
 
-    const videoList = this.wrapped.userData.Activity[
-      "Video Browsing History"
+    const videoList = this.wrapped.userData["Your Activity"][
+      "Watch History"
     ].VideoList?.sort((a, b) => {
       return new Date(a.Date).getTime() - new Date(b.Date).getTime();
     });
