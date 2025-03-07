@@ -33,9 +33,9 @@ export default class CommentsStatistic extends Statistic<CommentsStatisticResult
       const comment = commentList[i];
 
       totalComments++;
-      totalCommentLength += comment.Comment.length;
+      totalCommentLength += comment.comment.length;
 
-      const emojis = this.extractEmojis(comment.Comment);
+      const emojis = this.extractEmojis(comment.comment);
       emojis.forEach((emoji) => {
         if (emojiMap.has(emoji)) {
           emojiMap.set(emoji, emojiMap.get(emoji)! + 1);

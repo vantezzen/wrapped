@@ -39,7 +39,7 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
     for (let i = 0; i < likedPosts.length; i++) {
       const post = likedPosts[i];
 
-      const date = new Date(post.Date);
+      const date = new Date(post.date);
       const day = date.toDateString();
       if (likedPerDay.has(day)) {
         likedPerDay.set(day, likedPerDay.get(day)! + 1);
@@ -54,8 +54,8 @@ export default class LikesStatistic extends Statistic<LikesStatisticResult> {
       totalLikes: totalLikes,
       dayWithMostLikedPosts: mostLikedDay,
       firstLikedVideo: {
-        date: likedPosts[0].Date,
-        link: likedPosts[0].Link ?? "",
+        date: likedPosts[0].date,
+        link: likedPosts[0].link ?? "",
       },
     };
   }

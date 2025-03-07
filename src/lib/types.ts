@@ -1,6 +1,11 @@
 import { z } from "zod";
 
 export const TikTokFavouriteElementSchema = z.object({
+  date: z.string(),
+  link: z.string().optional().nullable(),
+});
+
+export const TikTokWatchHistoryElementSchema = z.object({
   Date: z.string(),
   Link: z.string().optional().nullable(),
 });
@@ -47,8 +52,8 @@ export const TikTokStatusElementSchema = z.object({
 });
 
 export const TikTokCommentElementSchema = z.object({
-  Date: z.string(),
-  Comment: z.string(),
+  date: z.string(),
+  comment: z.string(),
 });
 
 export const TikTokLiveCommentElementSchema = z.object({
@@ -138,7 +143,7 @@ export const TikTokActivityDataSchema = z.object({
     "Status List": z.array(TikTokStatusElementSchema).nullable().optional(),
   }),
   "Watch History": z.object({
-    VideoList: z.array(TikTokFavouriteElementSchema).nullable().optional(),
+    VideoList: z.array(TikTokWatchHistoryElementSchema).nullable().optional(),
   }),
 });
 
@@ -191,6 +196,9 @@ export type TikTokUserData = z.infer<typeof TikTokUserDataSchema>;
 export type TikTokActivityData = z.infer<typeof TikTokActivityDataSchema>;
 export type TikTokFavouritesList = z.infer<
   typeof TikTokFavouriteElementSchema
+>[];
+export type TikTokWatchHistoryList = z.infer<
+  typeof TikTokWatchHistoryElementSchema
 >[];
 export type TikTokFavouriteElement = z.infer<
   typeof TikTokFavouriteElementSchema
