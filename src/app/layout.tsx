@@ -12,6 +12,13 @@ export const metadata = {
 
 const PLAUSIBLE_EVENTS =
   "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
+const BSA = `(function(){
+		var bsa_optimize=document.createElement('script');
+		bsa_optimize.type='text/javascript';
+		bsa_optimize.async=true;
+		bsa_optimize.src='https://cdn4.buysellads.net/pub/vantezzen.js?'+(new Date()-new Date()%600000);
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
+	})();`;
 
 export default function RootLayout({
   children,
@@ -22,6 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.png" />
+
+        <script dangerouslySetInnerHTML={{ __html: BSA }}></script>
       </head>
 
       <body className={`${inter.className} w-screen min-h-screen`}>
