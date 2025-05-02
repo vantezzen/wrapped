@@ -95,7 +95,8 @@ export default class Wrapped {
   constructor(public userData: TikTokUserData) {
     const userActivity = userData["Your Activity"] ?? userData.Activity;
     const watchHistory =
-      userActivity["Watch History"] ?? userActivity["Video Browsing History"];
+      userActivity?.["Watch History"] ??
+      userActivity?.["Video Browsing History"];
     if (
       userActivity &&
       watchHistory &&
