@@ -9,8 +9,10 @@ export default class LiveStatistic extends Statistic<LiveStatisticResult> {
   name = "LiveStatistic";
 
   calculateResult(): LiveStatisticResult {
-    const livePostsMap =
-      this.wrapped.userData["Tiktok Live"]["Watch Live History"].WatchLiveMap;
+    const liveInfo =
+      this.wrapped.userData["TikTok Live"] ??
+      this.wrapped.userData["Tiktok Live"];
+    const livePostsMap = liveInfo["Watch Live History"].WatchLiveMap;
     if (!livePostsMap) {
       return {
         totalLiveViewed: 0,

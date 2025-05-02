@@ -121,6 +121,8 @@ export const TikTokActivityDataSchema = z.object({
   Hashtag: z.object({
     HashtagList: z.array(TikTokHashtagElementSchema).nullable().optional(),
   }),
+
+  // @deprecated Old schema
   "Like List": z.object({
     ItemFavoriteList: z
       .array(TikTokFavouriteElementSchema)
@@ -179,6 +181,13 @@ export const TikTokUserDataSchema = z.object({
       CommentsList: z.array(TikTokCommentElementSchema).nullable().optional(),
     }),
   }),
+
+  "TikTok Live": z.object({
+    "Watch Live History": z.object({
+      WatchLiveMap: z.record(TikTokWatchLiveElementSchema).optional(),
+    }),
+  }),
+  // @deprecated Old schema
   "Tiktok Live": z.object({
     "Watch Live History": z.object({
       WatchLiveMap: z.record(TikTokWatchLiveElementSchema).optional(),
@@ -189,6 +198,26 @@ export const TikTokUserDataSchema = z.object({
       VideoList: z.array(TikTokOwnVideoElementSchema).nullable().optional(),
     }),
   }),
+  "Profile And Settings": z.object({
+    "Profile Info": z.object({
+      ProfileMap: z.object({
+        likesReceived: z.string(),
+        profilePhoto: z.string(),
+        userName: z.string(),
+      }),
+    }),
+  }),
+
+  "Likes and Favorites": z.object({
+    "Like List": z.object({
+      ItemFavoriteList: z
+        .array(TikTokFavouriteElementSchema)
+        .nullable()
+        .optional(),
+    }),
+  }),
+
+  // @deprecated Old schema
   Profile: z.object({
     "Profile Info": z.object({
       ProfileMap: z.object({

@@ -113,6 +113,7 @@ export default class Wrapped {
     }
 
     const profileInfo =
+      this.userData["Profile And Settings"]?.["Profile Info"] ??
       this.userData.Profile["Profile Info"] ??
       this.userData.Profile["Profile Information"];
 

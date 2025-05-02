@@ -18,7 +18,9 @@ function anonymizeUserData(userData: TikTokUserData) {
     Profile: {
       "Profile Info": {
         ProfileMap: {
-          ...userData.Profile["Profile Info"].ProfileMap,
+          ...(userData["Profile And Settings"] ?? userData.Profile)[
+            "Profile Info"
+          ].ProfileMap,
           PlatformInfo: null,
           userName: "Anonymous",
           telephoneNumber: null,
