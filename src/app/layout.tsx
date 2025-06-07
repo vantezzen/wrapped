@@ -13,7 +13,7 @@ export const metadata = {
 const PLAUSIBLE_EVENTS =
   "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
 
-const BSA = `(function(){Add commentMore actions
+const BSA = `(function(){
 	var bsa_optimize=document.createElement('script');
 	bsa_optimize.type='text/javascript';
 	bsa_optimize.async=true;
