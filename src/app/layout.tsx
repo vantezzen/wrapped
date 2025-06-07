@@ -13,6 +13,14 @@ export const metadata = {
 const PLAUSIBLE_EVENTS =
   "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }";
 
+const BSA = `(function(){Add commentMore actions
+	var bsa_optimize=document.createElement('script');
+	bsa_optimize.type='text/javascript';
+	bsa_optimize.async=true;
+	bsa_optimize.src='https://cdn4.buysellads.net/pub/vantezzen.js?'+(new Date()-new Date()%600000);
+	(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
+})();`;
+
 export default function RootLayout({
   children,
 }: {
@@ -53,6 +61,7 @@ export default function RootLayout({
         <GoogleAnalytics gaId="G-9C99MWZ0PM" />
 
         <script dangerouslySetInnerHTML={{ __html: PLAUSIBLE_EVENTS }}></script>
+        <script dangerouslySetInnerHTML={{ __html: BSA }}></script>
       </body>
     </html>
   );
