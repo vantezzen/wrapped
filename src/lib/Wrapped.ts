@@ -119,7 +119,7 @@ export default class Wrapped {
       this.userData.Profile?.["Profile Information"];
 
     return {
-      name: profileInfo.ProfileMap.userName,
+      name: profileInfo?.ProfileMap?.userName ?? "You",
       videoAmountWatched: this.calculateStatistic(VideoAmountWatchedStatistic),
       watchSessions: this.calculateStatistic(WatchSessionsStatistic),
       comments: this.calculateStatistic(CommentsStatistic),
